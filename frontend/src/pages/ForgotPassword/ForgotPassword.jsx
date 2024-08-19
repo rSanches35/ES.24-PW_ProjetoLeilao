@@ -14,20 +14,7 @@ import { InputText } from 'primereact/inputtext';
 
 const ForgotPassword = () => {
 
-    const [minutes, setMinutes] = useState(5);
-    const [seconds, setSeconds] = useState(0);
-
-    useEffect(() => {
-
-        const interval = setInterval(() => {
-            if (seconds > 0) { setSeconds(prevSeconds => prevSeconds - 1);}
-            else if (minutes > 0) { setMinutes(prevMinutes => prevMinutes - 1); setSeconds(59);}
-        },
-        1000);
-
-        // Limpar o intervalo ao desmontar o componente
-        return () => clearInterval(interval);
-    }, [minutes, seconds]);
+    const [currentSection, setCurrentSection] = useState(1);
 
     const [password, setPassword] = useState("");
     const [passwordConfirm, setPasswordConfirm] = useState("");
@@ -94,17 +81,69 @@ const ForgotPassword = () => {
     };
 
 
+    const [minutes, setMinutes] = useState(5);
+    const [seconds, setSeconds] = useState(0);
+
+    useEffect(() => {
+
+        if (currentSection === 2) {
+            const interval = setInterval(() => {
+                if (seconds > 0) {
+                    setSeconds(prevSeconds => prevSeconds - 1);
+                } else if (minutes > 0) {
+                    setMinutes(prevMinutes => prevMinutes - 1);
+                    setSeconds(59);
+                }
+            }, 1000);
+
+            return () => clearInterval(interval);
+        }
+    }, [minutes, seconds, currentSection]);
+
+    const handleNext = () => {
+        setCurrentSection(prevSection => prevSection + 1);
+    };
+
+    const handleBack = () => {
+        setCurrentSection(prevSection => prevSection - 1);
+    };
+
     return (
         <div>
             <Helmet><title>Forgot Password</title></Helmet>
 
             <Card title="Recover Password"
             className="pt-5 md:w-25rem flex flex-column align-items-center text-center">
-                
+
+                {currentSection === 1 && (
+                <>
+
                 <InputText
                 placeholder="E-Mail"
-                className="mt-5 mb-6 w-10"
+                className="mt-5 w-10"
                 />
+
+                <Button
+                label="Next"
+                className="mt-5 mb-3 px-6"
+                onClick={handleNext}
+                />
+
+                <div className="flex flex-column align-items-center">
+
+                <Link to="/login" className="w-full">
+                    <Button
+                    label="Back"
+                    link/>
+                </Link>
+
+                </div>
+
+                </>
+                )}
+
+                {currentSection === 2 && (
+                <>
 
                 <p>A code has been sent to your E-Mail...</p>
                 <p
@@ -124,6 +163,28 @@ const ForgotPassword = () => {
                 />
 
                 </div>
+
+                <Button
+                label="Next"
+                className="mt-5 mb-3 px-6"
+                onClick={handleNext}
+                />
+
+                <div className="flex flex-column align-items-center">
+
+                <Button
+                label="Back"
+                onClick={handleBack}
+                link
+                />
+
+                </div>
+
+                </>
+                )}
+
+                {currentSection === 3 && (
+                <>
 
                 <Password
                 placeholder="Password"
@@ -150,20 +211,25 @@ const ForgotPassword = () => {
 
                 {errorMessage && <p className="text-red-500">{errorMessage}</p>}
 
-                <Button
-                label="Next"
-                className="mt-5 mb-3 px-6"
-                />
+                <Link to="/login" className="w-full">
+                    <Button
+                    label="Next"
+                    className="mt-5 mb-3 px-6"/>
+                </Link>
 
                 <div className="flex flex-column align-items-center">
 
                 <Link to="/login" className="w-full">
                     <Button
-                    label="Back"
+                    label="Cancel"
                     link/>
                 </Link>
 
                 </div>
+
+                </>
+                )}
+
             </Card>
         </div>
     );
