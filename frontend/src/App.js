@@ -6,7 +6,7 @@ import PrivateRouter from './components/PrivateRouter';
 import DefaultLayout from './components/DefaultLayout';
 import SimpleLayout from './components/SimpleLayout';
 
-import ForgotPassword from './pages/ForgotPassword/ForgotPassword';
+import ForgotPassword from './pages/forgot-password/ForgotPassword';
 import Register from './pages/register/Register';
 import Login from './pages/login/Login';
 import Home from './pages/home/Home';

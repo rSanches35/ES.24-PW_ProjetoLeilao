@@ -39,7 +39,7 @@ const Login = () => {
     }
 
     return (
-        <div>
+        <div className="body-login">
             <Helmet><title>Log In</title></Helmet>
 
             <Card title="Log In"

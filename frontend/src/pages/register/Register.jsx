@@ -80,7 +80,7 @@ const Register = () => {
     };
 
     return (
-        <div>
+        <div className="body-register">
             <Helmet><title>Register</title></Helmet>
 
             <Card title="Register"

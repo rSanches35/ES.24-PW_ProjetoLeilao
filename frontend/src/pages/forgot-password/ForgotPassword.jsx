@@ -109,7 +109,7 @@ const ForgotPassword = () => {
     };
 
     return (
-        <div>
+        <div className="body-forgot-password">
             <Helmet><title>Forgot Password</title></Helmet>
 
             <Card title="Recover Password"
