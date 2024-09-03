@@ -5,7 +5,7 @@ import Logout from "../../components/logout/Logout";
 const Home = () =>{
 
     return(
-        <div>
+        <div className="body-home">
             <h1>Página Inicial</h1>
             <Logout/>
         </div>
