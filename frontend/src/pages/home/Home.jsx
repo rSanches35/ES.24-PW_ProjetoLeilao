@@ -1,13 +1,13 @@
 import React from "react";
+import { Helmet } from 'react-helmet';
+
 import './Home.css'
-import Logout from "../../components/logout/Logout";
 
 const Home = () =>{
 
     return(
-        <div>
-            <h1>Página Inicial</h1>
-            <Logout/>
+        <div className="body-home">
+            <Helmet><title>Dashboard - Maxin'UP</title></Helmet>
         </div>
     );
 }; export default Home;

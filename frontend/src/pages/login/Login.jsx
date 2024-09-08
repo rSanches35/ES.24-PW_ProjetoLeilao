@@ -24,6 +24,11 @@ const Login = () => {
         setUser({...user, [input.target.name]:input.target.value});
     }
 
+    const handleKeyDown = (event) => {
+        
+        if (event.key === 'Enter') { login();}
+    }
+
     const login = () =>{
 
         if(user.email == "user" && user.password == "123") {
@@ -39,7 +44,7 @@ const Login = () => {
     }
 
     return (
-        <div>
+        <div className="body-login">
             <Helmet><title>Log In</title></Helmet>
 
             <Card title="Log In"
@@ -50,6 +55,7 @@ const Login = () => {
                 name="email"
                 className="mt-5 w-10"
                 onChange={handleChange}
+                onKeyDown={handleKeyDown}
                 />
 
                 <Password
@@ -60,6 +66,7 @@ const Login = () => {
                 className="mt-3 w-10"
                 inputStyle={{ width: '100%' }}
                 onChange={handleChange}
+                onKeyDown={handleKeyDown}
                 />
 
                 <Button

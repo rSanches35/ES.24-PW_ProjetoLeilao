@@ -1,15 +1,27 @@
 import React from "react";
+import { useLocation } from 'react-router-dom';
 
 import Header from './header/Header';
 import Footer from './footer/Footer';
 
-const DefaultLayout = ({children}) =>{
+import './DefaultLayout.css';
 
-    return(
-        <>
-            <Header/>
+const DefaultLayout = ({ children }) => {
+
+    const location = useLocation();
+    const pageConfig = {
+        '/': { title: 'Dashboard', icon: 'pi pi-chart-bar' },
+        '/profile': { title: 'Profile', icon: 'pi pi-user' },
+    };
+    const currentConfig = pageConfig[location.pathname];
+
+    return (
+        <div className="main-container">
+            <Header title={currentConfig.title} icon={currentConfig.icon} />
+            <div className="content">
                 {children}
-            <Footer/>
-        </>
+            </div>
+            <Footer />
+        </div>
     );
 }; export default DefaultLayout;
