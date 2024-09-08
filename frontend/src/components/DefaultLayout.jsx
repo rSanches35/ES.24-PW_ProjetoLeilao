@@ -10,10 +10,12 @@ const DefaultLayout = ({children}) =>{
     return(
         <div className="main-container">
             <Header />
+            {/*
             <div className="content">
                 {children}
             </div>
             <Footer />
+            */}
         </div>
     );
 }; export default DefaultLayout;
