@@ -1,22 +1,46 @@
+import React, { useState, useRef, useEffect } from 'react';
+import './Header.css'
 
-import React, { useState, useRef } from 'react';
-import { Sidebar } from 'primereact/sidebar';
 import { Button } from 'primereact/button';
 import { Avatar } from 'primereact/avatar';
-import { Ripple } from 'primereact/ripple';
+import { Sidebar } from 'primereact/sidebar';
 import { StyleClass } from 'primereact/styleclass';
 
-const Header = () =>{
+const Header = ({ title, icon }) =>{
 
-    const [visible, setVisible] = useState(false);
     const btnRef1 = useRef(null);
+    const [visibleSideBar, setVisibleSideBar] = useState(false);
+    const [visibleLanguageMenu, setVisibleLanguageMenu] = useState(false);
+    const languageMenuRef = useRef(null);
+
+    const languageMenuItems = [
+        { label: 'EN-US (English)', flag: '/images/flag-us.png' },
+        { label: 'PT-BR (Português)',  flag: '/images/flag-br.png'  },
+    ];
+
+    const toggleLanguageMenu = () => {
+        setVisibleLanguageMenu(prevState => !prevState);
+    };
+
+    const handleClickOutside = (event) => {
+        if (languageMenuRef.current && !languageMenuRef.current.contains(event.target)) {
+            setVisibleLanguageMenu(false);
+        }
+    };
+
+    useEffect(() => {
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+    }, []);
 
     return (
-        <>
+        <div>
             <Sidebar
                 className="sidebar-content"
-                visible={visible}
-                onHide={() => setVisible(false)}
+                visible={visibleSideBar}
+                onHide={() => setVisibleSideBar(false)}
                 content={({ closeIconRef, hide }) => (
                     <div className="min-h-screen flex relative lg:static surface-ground">
                         <div id="app-sidebar-2" className="surface-section h-screen block flex-shrink-0 absolute lg:static left-0 top-0 z-1 border-right-1 surface-border select-none" style={{ width: '280px' }}>
@@ -77,7 +101,7 @@ const Header = () =>{
                                             <a className="p-ripple flex align-items-center cursor-pointer p-3 border-round text-700 hover:surface-100 transition-duration-150 transition-colors w-full">
                                                 <i className="pi pi-bell mr-2"></i>
                                                 <span className="font-medium">Notifications</span>
-                                                <span className="inline-flex align-items-center justify-content-center ml-auto bg-blue-500 text-0 border-circle" style={{ minWidth: '1.5rem', height: '1.5rem' }}>
+                                                <span className="inline-flex align-items-center justify-content-center ml-auto bg-indigo-400 text-0 border-circle" style={{ minWidth: '1.5rem', height: '1.5rem' }}>
                                                     4
                                                 </span>
                                             </a>
@@ -102,7 +126,33 @@ const Header = () =>{
                     </div>
                 )}
             ></Sidebar>
-            <Button icon="pi pi-arrow-right" onClick={() => setVisible(true)} />
-        </>
+
+            <div className="container-topbar flex align-items-center">
+                <i className="pi pi-bars ml-3 mr-1 icon-topbar-left" style={{ fontSize: '1.3rem' }} onClick={() => setVisibleSideBar(true)}></i>
+
+                <img src="/images/logo.png" alt="Logo"  height="35" className="ml-2 mr-3"/>
+                <span className="font-semibold text-2xl text-primary title-topbar">M'UP</span>
+
+                <i className={`${icon} ml-5 page-icon`} style={{ fontSize: '1.1rem' }}></i>
+                <span className="font-semibold text-lg ml-2 page-topbar">{title}</span>
+
+                <div className="icon-topbar-right-position">
+                    <div className="flex align-items-center relative" ref={languageMenuRef}>
+                        <i className="pi pi-globe mr-5 icon-topbar-right" style={{ fontSize: '1.3rem' }} onClick={toggleLanguageMenu}></i>
+                        {visibleLanguageMenu && (
+                            
+                            <div className="user-menu mr-4">
+                                {languageMenuItems.map((item, index) => (
+                                    <div key={index} className="user-menu-item -mr-8">
+                                        <img src={`${item.flag}`} height="20" alt="" className="mr-3"/>
+                                        {item.label}
+                                    </div>
+                                ))}
+                            </div>
+                        )}
+                    </div>
+                </div>
+            </div>
+        </div>
     )
 }; export default Header;
