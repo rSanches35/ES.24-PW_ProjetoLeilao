@@ -1,11 +1,13 @@
 import React from "react";
+import { Helmet } from 'react-helmet';
+
 import './Home.css'
 
 const Home = () =>{
 
     return(
         <div className="body-home">
-            <h1>Página Inicial</h1>
+            <Helmet><title>Dashboard - Maxin'UP</title></Helmet>
         </div>
     );
 }; export default Home;

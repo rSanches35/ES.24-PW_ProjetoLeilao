@@ -14,8 +14,8 @@ const Header = ({ title, icon }) =>{
     const languageMenuRef = useRef(null);
 
     const languageMenuItems = [
-        { label: 'EN-US (English)', flag: '/images/flag-us.png' },
-        { label: 'PT-BR (Português)',  flag: '/images/flag-br.png'  },
+        { label: 'EN-US [English]', flag: '/images/flag-us.png' },
+        { label: 'PT-BR [Português]',  flag: '/images/flag-br.png'  },
     ];
 
     const toggleLanguageMenu = () => {
@@ -58,7 +58,7 @@ const Header = ({ title, icon }) =>{
                                     <ul className="list-none p-3 m-0">
                                         <li>
                                             <a className="p-ripple flex align-items-center cursor-pointer p-3 border-round text-700 hover:surface-100 transition-duration-150 transition-colors w-full">
-                                                <i className="pi pi-home mr-2"></i>
+                                                <i className="pi pi-chart-bar mr-2"></i>
                                                 <span className="font-medium">Dashboard</span>
                                             </a>
                                         </li>
@@ -79,7 +79,7 @@ const Header = ({ title, icon }) =>{
                                                 </li>
                                                 <li>
                                                     <a className="p-ripple flex align-items-center cursor-pointer p-3 border-round text-700 hover:surface-100 transition-duration-150 transition-colors w-full">
-                                                        <i className="pi pi-chart-bar mr-2"></i>
+                                                        <i className="pi pi-clipboard mr-2"></i>
                                                         <span className="font-medium">Report</span>
                                                     </a>
                                                 </li>
@@ -141,9 +141,9 @@ const Header = ({ title, icon }) =>{
                         <i className="pi pi-globe mr-5 icon-topbar-right" style={{ fontSize: '1.3rem' }} onClick={toggleLanguageMenu}></i>
                         {visibleLanguageMenu && (
                             
-                            <div className="user-menu mr-4">
+                            <div className="language-menu mr-4">
                                 {languageMenuItems.map((item, index) => (
-                                    <div key={index} className="user-menu-item -mr-8">
+                                    <div key={index} className="language-menu-item -mr-8">
                                         <img src={`${item.flag}`} height="20" alt="" className="mr-3"/>
                                         {item.label}
                                     </div>

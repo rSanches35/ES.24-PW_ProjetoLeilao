@@ -11,10 +11,10 @@
 .title-topbar {
 
     padding: 5px 20px 5px 0;
-    border-right: 2px solid #dbdbdb;
+    border-right: 2px solid #C1C1FF;
 }
 
-.page-icon, .page-topbar { color: #5c5c5c;}
+.page-icon, .page-topbar { color: #5C5C5C;}
 
 .icon-topbar-left, .icon-topbar-right {
 
@@ -28,7 +28,7 @@
 
     cursor: pointer;
     color: #3234a5;
-    background-color: #d3d3ff;
+    background-color: #D3D3FF;
 }
 
 .icon-topbar-right-position {
@@ -37,7 +37,7 @@
     right: 0px;
 }
 
-.user-menu {
+.language-menu {
     
     position: absolute;
     top: 100%;
@@ -48,7 +48,7 @@
     background-color: #FFFFFF; box-shadow: 2px 2px 9px rgba(0, 0, 0, 0.1);
 }
 
-.user-menu-item {
+.language-menu-item {
 
     cursor: pointer;
     white-space: nowrap;
@@ -58,4 +58,4 @@
     align-items: center;
 }
 
-.user-menu-item:hover { background-color: #F5F5F5;}  /* background-hover */
+.language-menu-item:hover { background-color: #F5F5F5;}
