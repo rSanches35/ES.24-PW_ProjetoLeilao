@@ -19,5 +19,24 @@
     "support": "Suporte",
     "faq": "FAQ",
     "shipping": "Envio",
-    "payment": "Pagamento"
+    "payment": "Pagamento",
+
+    "id": "iD",
+    "since": "Criação",
+    "birthday": "Nascimento",
+    "phone": "Telefone",
+    "bidder": "Comprador",
+    "address": "Endereço",
+    "location": "Local",
+    "zip-code": "CEP",
+    "street": "Rua",
+    "neighborhood": "Bairro",
+    "in-progress": "Em Construção...",
+    "edit-address": "Editar Endereço",
+    "state": "Estado",
+    "code": "UF",
+    "city": "Cidade",
+    "number": "Número",
+    "notes": "Observações",
+    "save": "Salvar"
 }

@@ -19,5 +19,24 @@
     "support": "Support",
     "faq": "FAQ",
     "shipping": "Shipping",
-    "payment": "Payment"
+    "payment": "Payment",
+
+    "id": "iD",
+    "since": "Since",
+    "birthday": "Birthday",
+    "phone": "Phone",
+    "bidder": "Bidder",
+    "address": "Address",
+    "location": "Location",
+    "zip-code": "ZIP Code",
+    "street": "Street",
+    "neighborhood": "Neighborhood",
+    "in-progress": "In Progress...",
+    "edit-address": "Edit Address",
+    "state": "State",
+    "code": "Code",
+    "city": "City",
+    "number": "Number",
+    "notes": "Notes",
+    "save": "Save"
 }
