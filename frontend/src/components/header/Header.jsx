@@ -1,4 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
+import { useTranslation } from "react-i18next";
+
 import './Header.css'
 
 import { Button } from 'primereact/button';
@@ -7,6 +9,9 @@ import { Sidebar } from 'primereact/sidebar';
 import { StyleClass } from 'primereact/styleclass';
 
 const Header = ({ title, icon }) =>{
+
+    const {t, i18n} = useTranslation();
+    const changeLanguage = (language) =>{ i18n.changeLanguage(language);}
 
     const btnRef1 = useRef(null);
     const [visibleSideBar, setVisibleSideBar] = useState(false);
@@ -143,7 +148,12 @@ const Header = ({ title, icon }) =>{
                             
                             <div className="language-menu mr-4">
                                 {languageMenuItems.map((item, index) => (
-                                    <div key={index} className="language-menu-item -mr-8">
+                                    <div key={index} className="language-menu-item -mr-8"
+                                    onClick={() => {
+                                        if (item.label.includes('EN-US')) { changeLanguage('en');}
+                                        else if (item.label.includes('PT-BR')) {changeLanguage('pt');}
+                                        setVisibleLanguageMenu(false);
+                                    }}>
                                         <img src={`${item.flag}`} height="20" alt="" className="mr-3"/>
                                         {item.label}
                                     </div>
