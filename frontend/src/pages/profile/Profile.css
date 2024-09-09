@@ -1,0 +1,97 @@
+
+.card-profile {
+
+    width: 90%;
+    max-width: 1350px;
+    padding: 1rem;
+    box-shadow: 0 0 0 rgba(0, 0, 0, 0.0);
+}
+
+
+.grid-profile {
+
+    display: grid;
+    grid-template-columns: 1fr 2fr; /* Coluna Esquerda 1/3, Coluna Direita 2/3 */
+    gap: 2rem;
+}
+
+
+.grid-profile-sec-1 {
+    
+    position: relative;
+    padding: 3rem 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 20px;
+    background-color: #e2e2ff;
+}
+
+.grid-profile-sec-1 .profile-pic {
+    height: 120px;
+    width: 120px;
+    border: 2px solid #6366F1;
+}
+
+.grid-profile-sec-1 .main-info {
+
+    margin-top: 0.5rem;
+    border: 2px solid #cbcbfc;
+    padding: 15px 35px;
+    border-radius: 8px;
+}
+
+.grid-profile-sec-1 .role-tag {
+
+    background-color: #898bf3;
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 12px;
+}
+
+.grid-profile-sec-2 {
+
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+.grid-profile-sec-2 .mini-card {
+
+    position: relative;
+    background-color: #e2e2ff;
+    padding: 1.5rem;
+    border-radius: 20px;
+}
+
+.in-progress {
+
+    min-height: 170px;
+}
+
+.grid-profile .edit-icon {
+
+    position: absolute;
+    right: 25px;
+    bottom: 22px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.grid-profile .edit-icon:hover { color: #8688ff;}
+
+
+@media (max-width: 1000px) {
+
+    .grid-profile { grid-template-columns: 1fr;}
+    .grid-profile-sec-2 { border-right: none; border-bottom: 1px solid #ddd;}
+    .grid-profile-sec-2 { grid-template-columns: 1fr;}
+}
+
+@media (max-width: 600px) {
+
+    .grid-profile-sec-1 { padding: 1rem;}
+    .grid-profile-sec-2 { padding: 1rem; grid-template-columns: 1fr;}
+}

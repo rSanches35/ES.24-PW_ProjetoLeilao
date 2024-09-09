@@ -1,5 +1,6 @@
 import React from "react";
 import { Helmet } from 'react-helmet';
+import { Link } from 'react-router-dom';
 
 import './Footer.css'
 
@@ -32,7 +33,7 @@ const Footer = () => {
                             <ul className="widget-links">
                                 <li><a href="#">Home</a></li>
                                 <li><a href="#">Auctions</a></li>
-                                <li><a href="#">Profile</a></li>
+                                <li><a href="/profile">Profile</a></li>
                             </ul>
                         </div>
                         <div className="widget-footer">
