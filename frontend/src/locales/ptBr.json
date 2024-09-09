@@ -1,3 +1,10 @@
 {
-    
+    "dashboard": "Painel",
+    "auctions": "Leilões",
+    "explore": "Explorar",
+    "reports": "Relatórios",
+    "my-bids": "Meus Lances",
+    "calendar": "Calendário",
+    "notifications": "Notificações",
+    "settings": "Configurações"
 }

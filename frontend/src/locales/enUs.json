@@ -1,3 +1,10 @@
 {
-
+    "dashboard": "Dashboard",
+    "auctions": "Auctions",
+    "explore": "Explore",
+    "reports": "Reports",
+    "my-bids": "My Bids",
+    "calendar": "Calendar",
+    "notifications": "Notifications",
+    "settings": "Settings"
 }
