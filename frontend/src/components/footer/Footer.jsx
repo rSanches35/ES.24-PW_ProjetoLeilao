@@ -1,10 +1,12 @@
 import React from "react";
 import { Helmet } from 'react-helmet';
-import { Link } from 'react-router-dom';
+import { useTranslation } from "react-i18next";
 
 import './Footer.css'
 
 const Footer = () => {
+
+    const { t } = useTranslation();
 
     return (
         <div className="body-footer">
@@ -19,7 +21,7 @@ const Footer = () => {
                                 <img src="/images/logo.png" height="50" alt="" className="logo-footer"/>
                             </a>
                             <p className="description-footer">
-                                Make your bid and take home a piece of musical history. Unique treasures for true collectors.
+                                {t('footer-text')}
                             </p>
                             <ul className="footer-socials">
                                 <li><a href="#"><i class="fa-brands fa-facebook-f"></i></a></li>
@@ -29,31 +31,31 @@ const Footer = () => {
                             </ul>
                         </div>
                         <div className="widget-footer">
-                            <h6>Quick Links</h6>
+                            <h6>{t('quick-links')}</h6>
                             <ul className="widget-links">
-                                <li><a href="#">Home</a></li>
-                                <li><a href="#">Auctions</a></li>
-                                <li><a href="/profile">Profile</a></li>
+                                <li><a href="#">{t('home')}</a></li>
+                                <li><a href="#">{t('auctions')}</a></li>
+                                <li><a href="/profile">{t('profile')}</a></li>
                             </ul>
                         </div>
                         <div className="widget-footer">
-                            <h6>Company</h6>
+                            <h6>{t('company')}</h6>
                             <ul className="widget-links">
-                                <li><a href="#">About Us</a></li>
-                                <li><a href="#">Privacy Policy</a></li>
+                                <li><a href="#">{t('about-us')}</a></li>
+                                <li><a href="#">{t('privacy-policy')}</a></li>
                             </ul>
                         </div>
                         <div className="widget-footer">
-                            <h6>Support</h6>
+                            <h6>{t('support')}</h6>
                             <ul className="widget-links">
-                                <li><a href="#">FAQ</a></li>
-                                <li><a href="#">Shipping</a></li>
-                                <li><a href="#">Payment Option</a></li>
+                                <li><a href="#">{t('faq')}</a></li>
+                                <li><a href="#">{t('shipping')}</a></li>
+                                <li><a href="#">{t('payment')}</a></li>
                             </ul>
                         </div>
                     </div>
                     <div className="copyright-wrapper">
-                        <p>Design and Developed by rSanches35</p>
+                        <p>{t('footer-created')}</p>
                     </div>
                 </div>
             </div>

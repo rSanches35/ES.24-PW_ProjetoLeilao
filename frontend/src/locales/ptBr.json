@@ -7,5 +7,17 @@
     "calendar": "Calendário",
     "notifications": "Notificações",
     "settings": "Configurações",
-    "profile" : "Perfil"
+    "profile" : "Perfil",
+
+    "footer-text": "Faça sua oferta e leve para casa um pedaço da história da música. Tesouros únicos para verdadeiros colecionadores.",
+    "footer-created": "Pensado e Desenvolvido por rSanches35",
+    "quick-links": "Conteúdo",
+    "home": "Início",
+    "company": "Empresa",
+    "about-us": "Sobre Nós",
+    "privacy-policy": "Sua Privacidade",
+    "support": "Suporte",
+    "faq": "FAQ",
+    "shipping": "Envio",
+    "payment": "Pagamento"
 }

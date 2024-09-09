@@ -7,5 +7,17 @@
     "calendar": "Calendar",
     "notifications": "Notifications",
     "settings": "Settings",
-    "profile" : "Profile"
+    "profile" : "Profile",
+
+    "footer-text": "Make your bid and take home a piece of musical history. Unique treasures for true collectors.",
+    "footer-created": "Design and Developed by rSanches35",
+    "quick-links": "Quick Links",
+    "home": "Home",
+    "company": "Company",
+    "about-us": "About Us",
+    "privacy-policy": "Privacy Policy",
+    "support": "Support",
+    "faq": "FAQ",
+    "shipping": "Shipping",
+    "payment": "Payment"
 }
