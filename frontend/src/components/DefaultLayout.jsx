@@ -1,5 +1,6 @@
 import React from "react";
 import { useLocation } from 'react-router-dom';
+import { useTranslation } from "react-i18next";
 
 import Header from './header/Header';
 import Footer from './footer/Footer';
@@ -8,10 +9,12 @@ import './DefaultLayout.css';
 
 const DefaultLayout = ({ children }) => {
 
+    const { t } = useTranslation();
+
     const location = useLocation();
     const pageConfig = {
-        '/': { title: 'Dashboard', icon: 'pi pi-chart-bar' },
-        '/profile': { title: 'Profile', icon: 'pi pi-user' },
+        '/': { title: t('dashboard'), icon: 'pi pi-chart-bar' },
+        '/profile': { title: t('profile'), icon: 'pi pi-user' },
     };
     const currentConfig = pageConfig[location.pathname];
 
