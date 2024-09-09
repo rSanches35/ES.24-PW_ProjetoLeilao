@@ -1,4 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
+import { useTranslation } from "react-i18next";
+
 import './Header.css'
 
 import { Button } from 'primereact/button';
@@ -7,6 +9,9 @@ import { Sidebar } from 'primereact/sidebar';
 import { StyleClass } from 'primereact/styleclass';
 
 const Header = ({ title, icon }) =>{
+
+    const {t, i18n} = useTranslation();
+    const changeLanguage = (language) =>{ i18n.changeLanguage(language);}
 
     const btnRef1 = useRef(null);
     const [visibleSideBar, setVisibleSideBar] = useState(false);
@@ -59,14 +64,14 @@ const Header = ({ title, icon }) =>{
                                         <li>
                                             <a className="p-ripple flex align-items-center cursor-pointer p-3 border-round text-700 hover:surface-100 transition-duration-150 transition-colors w-full">
                                                 <i className="pi pi-chart-bar mr-2"></i>
-                                                <span className="font-medium">Dashboard</span>
+                                                <span className="font-medium">{t('dashboard')}</span>
                                             </a>
                                         </li>
                                         <li>
                                             <StyleClass nodeRef={btnRef1} selector="@next" enterClassName="hidden" enterActiveClassName="slidedown" leaveToClassName="hidden" leaveActiveClassName="slideup">
                                                 <a ref={btnRef1} className="p-ripple flex align-items-center cursor-pointer p-3 border-round text-700 hover:surface-100 transition-duration-150 transition-colors w-full">
                                                     <i className="pi pi-hammer mr-2"></i>
-                                                    <span className="font-medium">Auctions</span>
+                                                    <span className="font-medium">{t('auctions')}</span>
                                                     <i className="pi pi-chevron-down ml-auto mr-1"></i>
                                                 </a>
                                             </StyleClass>
@@ -74,19 +79,19 @@ const Header = ({ title, icon }) =>{
                                                 <li>
                                                     <a className="p-ripple flex align-items-center cursor-pointer p-3 border-round text-700 hover:surface-100 transition-duration-150 transition-colors w-full">
                                                         <i className="pi pi-shop mr-2"></i>
-                                                        <span className="font-medium">Explore</span>
+                                                        <span className="font-medium">{t('explore')}</span>
                                                     </a>
                                                 </li>
                                                 <li>
                                                     <a className="p-ripple flex align-items-center cursor-pointer p-3 border-round text-700 hover:surface-100 transition-duration-150 transition-colors w-full">
                                                         <i className="pi pi-clipboard mr-2"></i>
-                                                        <span className="font-medium">Report</span>
+                                                        <span className="font-medium">{t('reports')}</span>
                                                     </a>
                                                 </li>
                                                 <li>
                                                     <a className="p-ripple flex align-items-center cursor-pointer p-3 border-round text-700 hover:surface-100 transition-duration-150 transition-colors w-full">
                                                         <i className="pi pi-wallet mr-2"></i>
-                                                        <span className="font-medium">My Bids</span>
+                                                        <span className="font-medium">{t('my-bids')}</span>
                                                     </a>
                                                 </li>
                                             </ul>
@@ -94,13 +99,13 @@ const Header = ({ title, icon }) =>{
                                         <li>
                                             <a className="p-ripple flex align-items-center cursor-pointer p-3 border-round text-700 hover:surface-100 transition-duration-150 transition-colors w-full">
                                                 <i className="pi pi-calendar mr-2"></i>
-                                                <span className="font-medium">Calendar</span>
+                                                <span className="font-medium">{t('calendar')}</span>
                                             </a>
                                         </li>
                                         <li>
                                             <a className="p-ripple flex align-items-center cursor-pointer p-3 border-round text-700 hover:surface-100 transition-duration-150 transition-colors w-full">
                                                 <i className="pi pi-bell mr-2"></i>
-                                                <span className="font-medium">Notifications</span>
+                                                <span className="font-medium">{t('notifications')}</span>
                                                 <span className="inline-flex align-items-center justify-content-center ml-auto bg-indigo-400 text-0 border-circle" style={{ minWidth: '1.5rem', height: '1.5rem' }}>
                                                     4
                                                 </span>
@@ -109,7 +114,7 @@ const Header = ({ title, icon }) =>{
                                         <li>
                                             <a className="p-ripple flex align-items-center cursor-pointer p-3 border-round text-700 hover:surface-100 transition-duration-150 transition-colors w-full">
                                                 <i className="pi pi-cog mr-2"></i>
-                                                <span className="font-medium">Settings</span>
+                                                <span className="font-medium">{t('settings')}</span>
                                             </a>
                                         </li>
                                     </ul>
@@ -143,7 +148,12 @@ const Header = ({ title, icon }) =>{
                             
                             <div className="language-menu mr-4">
                                 {languageMenuItems.map((item, index) => (
-                                    <div key={index} className="language-menu-item -mr-8">
+                                    <div key={index} className="language-menu-item -mr-8"
+                                    onClick={() => {
+                                        if (item.label.includes('EN-US')) { changeLanguage('en');}
+                                        else if (item.label.includes('PT-BR')) {changeLanguage('pt');}
+                                        setVisibleLanguageMenu(false);
+                                    }}>
                                         <img src={`${item.flag}`} height="20" alt="" className="mr-3"/>
                                         {item.label}
                                     </div>

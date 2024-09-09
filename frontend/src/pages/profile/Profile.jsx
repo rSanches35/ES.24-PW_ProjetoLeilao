@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Helmet } from 'react-helmet';
+import { useTranslation } from "react-i18next";
 
 import './Profile.css'
 
@@ -14,6 +15,8 @@ import { InputTextarea } from 'primereact/inputtextarea';
 import axios from 'axios';
 
 const Profile = () => {
+
+    const { t } = useTranslation();
 
     const [showDialog, setShowDialog] = useState(false); // State to control dialog visibility
     const [formData, setFormData] = useState({
@@ -61,7 +64,7 @@ const Profile = () => {
 
     return (
         <div className="body-profile flex justify-content-center mt-4 mb-8">
-            <Helmet><title>Profile - Maxin'UP</title></Helmet>
+            <Helmet><title>{t('profile')} - Maxin'UP</title></Helmet>
             <Card className="card-profile">
                 <div className="grid-profile">
 
@@ -73,13 +76,13 @@ const Profile = () => {
                         <h4 className="text-center -mt-3">rSanches35</h4>
 
                         <div className="text-start main-info">
-                            <p>iD: #HTJ40C4Z</p>
-                            <p className="-mt-2">Since: 09/09/2024</p>
-                            <p className="-mt-2">Birthday: 01/01/2000</p>
-                            <p className="-mt-2">Phone: (44) 9 9999-9999</p>
+                            <p>{t('id')}: #HTJ40C4Z</p>
+                            <p className="-mt-2">{t('since')}: 09/09/2024</p>
+                            <p className="-mt-2">{t('birthday')}: 01/01/2000</p>
+                            <p className="-mt-2">{t('phone')}: (44) 9 9999-9999</p>
                         </div>
 
-                        <span className="mt-5 role-tag">Bidder</span>
+                        <span className="mt-5 role-tag">{t('bidder')}</span>
                         <i className="pi pi-pencil edit-icon"></i>
                     </div>
 
@@ -88,56 +91,56 @@ const Profile = () => {
                         <div className="mini-card addres">
                             <h3>
                                 <i className="pi pi-home ml-1 mr-2" style={{ fontSize: '1.2rem' }}></i>
-                                Addres
+                                {t('address')}
                             </h3>
-                            <p className="-mt-2">Location: PR | Paranavaí</p>
-                            <p className="-mt-3">ZIP Code: 87750-000</p>
-                            <p className="-mt-2">Street: Crimson Planes, n1374</p>
-                            <p className="-mt-3">Neighborhood: Centro</p>
+                            <p className="-mt-2">{t('location')}: PR | Paranavaí</p>
+                            <p className="-mt-3">{t('zip-code')}: 87750-000</p>
+                            <p className="-mt-2">{t('street')}: Crimson Planes, n1374</p>
+                            <p className="-mt-3">{t('neighborhood')}: Centro</p>
 
                             <i className="pi pi-pencil edit-icon" onClick={() => setShowDialog(true)}></i>
                         </div>
                         <div className="mini-card in-progress">
                             <h3>
                             <i className="pi pi-spin pi-cog ml-1 mr-2" style={{ fontSize: '1.2rem' }}></i>
-                                In Progress...
+                                {t('in-progress')}
                             </h3>
                         </div>
                         <div className="mini-card in-progress">
                             <h3>
                                 <i className="pi pi-spin pi-cog ml-1 mr-2" style={{ fontSize: '1.2rem' }}></i>
-                                In Progress...
+                                {t('in-progress')}
                             </h3>
                         </div>
                         <div className="mini-card in-progress">
                             <h3>
                                 <i className="pi pi-spin pi-cog ml-1 mr-2" style={{ fontSize: '1.2rem' }}></i>
-                                In Progress...
+                                {t('in-progress')}
                             </h3>
                         </div>
                         <div className="mini-card in-progress">
                             <h3>
                                 <i className="pi pi-spin pi-cog ml-1 mr-2" style={{ fontSize: '1.2rem' }}></i>
-                                In Progress...
+                                {t('in-progress')}
                             </h3>
                         </div>
                         <div className="mini-card in-progress">
                             <h3>
                                 <i className="pi pi-spin pi-cog ml-1 mr-2" style={{ fontSize: '1.2rem' }}></i>
-                                In Progress...
+                                {t('in-progress')}
                             </h3>
                         </div>
                     </div>
                 </div>
             </Card>
 
-            <Dialog header="Edit Address" visible={showDialog} style={{ width: '400px' }} modal onHide={() => setShowDialog(false)}>
+            <Dialog header={t('edit-address')} visible={showDialog} style={{ width: '400px' }} modal onHide={() => setShowDialog(false)}>
                 <div className="p-fluid edit-dialog-fields pt-1">
 
                     <div className="p-field flex justify-content-between row mb-3">
                         <div className="p-field col-9 p-0 pr-3">
                             <InputText
-                            placeholder="State"
+                            placeholder={t('state')}
                             id="state"
                             name="state"
                             value={formData.state}
@@ -146,7 +149,7 @@ const Profile = () => {
                         </div>
                         <div className="p-field col-3 p-0 ">
                         <InputText 
-                        placeholder="Code"
+                        placeholder={t('code')}
                         id="stateCode"
                         name="stateCode"
                         value={formData.stateCode}
@@ -161,7 +164,7 @@ const Profile = () => {
 
                     <div className="p-field mb-3">
                         <InputText
-                        placeholder="City"
+                        placeholder={t('city')}
                         id="city"
                         name="city"
                         value={formData.city}
@@ -171,7 +174,7 @@ const Profile = () => {
 
                     <div className="p-field mb-3">
                         <InputMask
-                        placeholder="ZIP Code"
+                        placeholder={t('zip-code')}
                         mask="99999-999"
                         id="zipCode"
                         name="zipCode"
@@ -182,7 +185,7 @@ const Profile = () => {
 
                     <div className="p-field mb-3">
                         <InputText
-                        placeholder="Street"
+                        placeholder={t('street')}
                         id="street"
                         name="street"
                         value={formData.street}
@@ -193,7 +196,7 @@ const Profile = () => {
                     <div className="p-field flex justify-content-between row mb-3">
                         <div className="p-field col-9 p-0 pr-3">
                             <InputText
-                            placeholder="Neighborhood"
+                            placeholder={t('neighborhood')}
                             id="neighborhood"
                             name="neighborhood"
                             value={formData.neighborhood}
@@ -202,7 +205,7 @@ const Profile = () => {
                         </div>
                         <div className="p-field col-3 p-0">
                             <InputText
-                            placeholder="Number"
+                            placeholder={t('number')}
                             id="number"
                             name="number"
                             value={formData.number}
@@ -216,7 +219,7 @@ const Profile = () => {
                         rows={5}
                         cols={30}
                         autoResize
-                        placeholder="Notes"
+                        placeholder={t('notes')}
                         id="additionalInfo"
                         name="additionalInfo"
                         value={formData.additionalInfo}
@@ -224,7 +227,7 @@ const Profile = () => {
                         />
                     </div>
 
-                    <Button label="Save" onClick={handleSubmit}/>
+                    <Button label={t('save')} onClick={handleSubmit}/>
                 </div>
             </Dialog>
         </div>
