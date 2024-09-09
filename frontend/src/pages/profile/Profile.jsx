@@ -11,61 +11,70 @@ const Profile = () => {
     return (
         <div className="body-profile flex justify-content-center mt-6 mb-8">
             <Helmet><title>Profile - Maxin'UP</title></Helmet>
-            <Card className="perfil-card">
-                <div className="perfil-grid">
-                    {/* Seção 1: Foto e Informações Básicas */}
-                    <div className="secao1">
-                        <Avatar image="url-da-imagem.jpg" size="xlarge" shape="circle" className="p-d-block p-mx-auto" />
-                        <h2 className="p-text-center">Jill Anderson</h2>
-                        <p className="p-text-center text-muted">UI Designer</p>
-                        <div className="quote p-text-center">"Simplifying the planning of my business trips."</div>
-                        <div className="info-basica p-text-center">
-                            <p>Age: 26</p>
-                            <p>Status: Single</p>
-                            <p>Location: Brooklyn</p>
-                            <p>Archetype: Frequent Flyer</p>
+            <Card className="card-profile">
+                <div className="grid-profile">
+
+                    <div className="grid-profile-sec-1">
+                        <Avatar image="/images/logo.png" shape="circle" className="profile-pic" />
+
+                        <h2 className="text-center">Rafael Sanches Silva</h2>
+                        <h5 className="text-center -mt-3">rafaelsanches.s35@gmail.com</h5>
+                        <h4 className="text-center -mt-3">rSanches35</h4>
+
+                        <div className="text-start main-info">
+                            <p>iD: #HTJ40C4Z</p>
+                            <p className="-mt-2">Since: 09/09/2024</p>
+                            <p className="-mt-2">Birthday: 01/01/2000</p>
+                            <p className="-mt-2">Phone: (44) 9 9999-9999</p>
                         </div>
-                        <div className="tags p-d-flex p-jc-center">
-                            <span className="tag">Organized</span>
-                            <span className="tag">Practical</span>
-                            <span className="tag">Hardworking</span>
-                        </div>
+
+                        <span className="mt-5 role-tag">Bidder</span>
+                        <i className="pi pi-pencil edit-icon"></i>
                     </div>
 
-                    {/* Seção 2: Informações à direita */}
-                    <div className="secao2">
-                        {/* Bio Section */}
-                        <div className="mini-card">
-                            <h3>Bio</h3>
-                            <p>
-                                Jill is a Regional Director who travels 4-8 times each month for work. She has a specific region in which she travels, and she often visits the same cities and stays at the same hotel.
-                            </p>
+                    <div className="grid-profile-sec-2">
+
+                        <div className="mini-card addres">
+                            <h3>
+                                <i className="pi pi-home ml-1 mr-2" style={{ fontSize: '1.2rem' }}></i>
+                                Addres
+                            </h3>
+                            <p className="-mt-2">Location: PR | Paranavaí</p>
+                            <p className="-mt-3">ZIP Code: 87750-000</p>
+                            <p className="-mt-2">Street: Crimson Planes, n1374</p>
+                            <p className="-mt-3">Neighborhood: Centro</p>
+
+                            <i className="pi pi-pencil edit-icon"></i>
                         </div>
-                        {/* Personalidade Section */}
-                        <div className="mini-card">
-                            <h3>Personality</h3>
-                            <p>Introvert: 70% | Analytical: 60%</p>
+                        <div className="mini-card in-progress">
+                            <h3>
+                            <i className="pi pi-spin pi-cog ml-1 mr-2" style={{ fontSize: '1.2rem' }}></i>
+                                In Progress...
+                            </h3>
                         </div>
-                        {/* Motivations Section */}
-                        <div className="mini-card">
-                            <h3>Motivations</h3>
-                            <p>Price: High | Comfort: Medium</p>
+                        <div className="mini-card in-progress">
+                            <h3>
+                                <i className="pi pi-spin pi-cog ml-1 mr-2" style={{ fontSize: '1.2rem' }}></i>
+                                In Progress...
+                            </h3>
                         </div>
-                        {/* Outros cards */}
-                        <div className="mini-card">
-                            <h3>Goals</h3>
-                            <p>To spend less time booking travel</p>
+                        <div className="mini-card in-progress">
+                            <h3>
+                            <i className="pi pi-spin pi-cog ml-1 mr-2" style={{ fontSize: '1.2rem' }}></i>
+                                In Progress...
+                            </h3>
                         </div>
-                        <div className="mini-card">
-                            <h3>Frustrations</h3>
-                            <ul>
-                                <li>Too much time booking</li>
-                                <li>Not tech savvy</li>
-                            </ul>
+                        <div className="mini-card in-progress">
+                            <h3>
+                            <i className="pi pi-spin pi-cog ml-1 mr-2" style={{ fontSize: '1.2rem' }}></i>
+                                In Progress...
+                            </h3>
                         </div>
-                        <div className="mini-card">
-                            <h3>Favorite Brands</h3>
-                            <p>Adidas, Nike, Netflix</p>
+                        <div className="mini-card in-progress">
+                            <h3>
+                                <i className="pi pi-spin pi-cog ml-1 mr-2" style={{ fontSize: '1.2rem' }}></i>
+                                In Progress...
+                            </h3>
                         </div>
                     </div>
                 </div>

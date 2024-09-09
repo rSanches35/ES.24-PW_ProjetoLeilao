@@ -1,91 +1,109 @@
 
+.card-profile {
 
-.perfil-card {
     width: 90%;
-    max-width: 1200px;
-    padding: 2rem;
-    background-color: #ffffff;
-    border-radius: 15px;
-    border: 2px solid #aaacff;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    max-width: 1350px;
+    padding: 1rem;
+    box-shadow: 0 0 0 rgba(0, 0, 0, 0.0);
 }
 
-/* Grid Principal */
-.perfil-grid {
+
+.grid-profile {
+
     display: grid;
     grid-template-columns: 1fr 2fr; /* Coluna Esquerda 1/3, Coluna Direita 2/3 */
     gap: 2rem;
 }
 
-/* Seção Esquerda (Foto e Infos) ocupa toda a coluna da esquerda */
-.secao1 {
-    padding: 1.5rem;
-    border-right: 1px solid #aaacff;
+
+.grid-profile-sec-1 {
+    
+    position: relative;
+    padding: 3rem 1rem;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    border-radius: 20px;
+    background-color: #e2e2ff;
 }
 
-.quote {
-    font-style: italic;
-    margin-top: 1rem;
+.grid-profile-sec-1 .profile-pic {
+    height: 120px;
+    width: 120px;
+    border: 2px solid #6366F1;
 }
 
-.info-basica {
-    margin-top: 1.5rem;
+.grid-profile-sec-1 .main-info {
+
+    margin-top: 0.5rem;
+    border: 2px solid #cbcbfc;
+    padding: 15px 35px;
+    border-radius: 8px;
 }
 
-.tags {
-    margin-top: 1.5rem;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-}
+.grid-profile-sec-1 .role-tag {
 
-.tag {
-    background-color: #ff6b6b;
+    background-color: #898bf3;
     color: white;
     padding: 0.5rem 1rem;
-    border-radius: 15px;
+    border-radius: 12px;
 }
 
-/* Seção Direita (Infos Extras) ocupa 2/3 da largura */
-.secao2 {
+.grid-profile-sec-2 {
+
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 1rem;
 }
 
-.mini-card {
-    background-color: #f4f4f4;
+.grid-profile-sec-2 .mini-card {
+
+    position: relative;
+    background-color: #e2e2ff;
     padding: 1.5rem;
-    border-radius: 10px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    border-radius: 20px;
 }
+
+.in-progress {
+
+    min-height: 170px;
+}
+
+.grid-profile .edit-icon {
+
+    position: absolute;
+    right: 25px;
+    bottom: 22px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.grid-profile .edit-icon:hover { color: #6366F1;}
 
 /* Comportamento Responsivo */
 
 /* Quando a tela for menor que 960px */
-@media (max-width: 960px) {
-    .perfil-grid {
+@media (max-width: 1000px) {
+    .grid-profile {
         grid-template-columns: 1fr; /* Seção 1 e 2 empilhadas, cada uma ocupa 100% */
     }
-    .secao1 {
+    .grid-profile-sec-2 {
         border-right: none; /* Removendo a borda divisória entre seções quando empilhadas */
         border-bottom: 1px solid #ddd; /* Adicionando borda abaixo da seção 1 para separação */
     }
-    .secao2 {
+    .grid-profile-sec-2 {
         grid-template-columns: 1fr; /* Mini-cards em uma coluna */
     }
 }
 
 /* Quando a tela for menor que 600px */
 @media (max-width: 600px) {
-    .secao1 {
+    .grid-profile-sec-1 {
         padding: 1rem; /* Reduzindo o padding para telas muito pequenas */
     }
-    .secao2 {
+    .grid-profile-sec-2 {
         padding: 1rem;
         grid-template-columns: 1fr; /* Mini-cards ocupam 100% do espaço disponível */
     }
