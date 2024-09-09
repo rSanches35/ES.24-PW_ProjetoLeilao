@@ -1,0 +1,92 @@
+
+
+.perfil-card {
+    width: 90%;
+    max-width: 1200px;
+    padding: 2rem;
+    background-color: #ffffff;
+    border-radius: 15px;
+    border: 2px solid #aaacff;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Grid Principal */
+.perfil-grid {
+    display: grid;
+    grid-template-columns: 1fr 2fr; /* Coluna Esquerda 1/3, Coluna Direita 2/3 */
+    gap: 2rem;
+}
+
+/* Seção Esquerda (Foto e Infos) ocupa toda a coluna da esquerda */
+.secao1 {
+    padding: 1.5rem;
+    border-right: 1px solid #aaacff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.quote {
+    font-style: italic;
+    margin-top: 1rem;
+}
+
+.info-basica {
+    margin-top: 1.5rem;
+}
+
+.tags {
+    margin-top: 1.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.tag {
+    background-color: #ff6b6b;
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 15px;
+}
+
+/* Seção Direita (Infos Extras) ocupa 2/3 da largura */
+.secao2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+.mini-card {
+    background-color: #f4f4f4;
+    padding: 1.5rem;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Comportamento Responsivo */
+
+/* Quando a tela for menor que 960px */
+@media (max-width: 960px) {
+    .perfil-grid {
+        grid-template-columns: 1fr; /* Seção 1 e 2 empilhadas, cada uma ocupa 100% */
+    }
+    .secao1 {
+        border-right: none; /* Removendo a borda divisória entre seções quando empilhadas */
+        border-bottom: 1px solid #ddd; /* Adicionando borda abaixo da seção 1 para separação */
+    }
+    .secao2 {
+        grid-template-columns: 1fr; /* Mini-cards em uma coluna */
+    }
+}
+
+/* Quando a tela for menor que 600px */
+@media (max-width: 600px) {
+    .secao1 {
+        padding: 1rem; /* Reduzindo o padding para telas muito pequenas */
+    }
+    .secao2 {
+        padding: 1rem;
+        grid-template-columns: 1fr; /* Mini-cards ocupam 100% do espaço disponível */
+    }
+}
