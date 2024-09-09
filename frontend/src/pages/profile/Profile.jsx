@@ -1,12 +1,36 @@
-import React from "react";
+import React, { useState } from "react";
 import { Helmet } from 'react-helmet';
 
 import './Profile.css'
 
 import { Card } from 'primereact/card';
 import { Avatar } from 'primereact/avatar';
+import { Button } from 'primereact/button';
+import { Dialog } from 'primereact/dialog';
+import { InputText } from 'primereact/inputtext';
 
 const Profile = () => {
+
+    const [showDialog, setShowDialog] = useState(false); // State to control dialog visibility
+    const [formData, setFormData] = useState({
+        state: '',
+        city: '',
+        street: '',
+        number: '',
+        neighborhood: '',
+        additionalInfo: ''
+    });
+
+    const handleInputChange = (e) => {
+        const { name, value } = e.target;
+        setFormData({ ...formData, [name]: value });
+    };
+
+    const handleSubmit = () => {
+        
+        console.log(formData);
+        setShowDialog(false);
+    };
 
     return (
         <div className="body-profile flex justify-content-center mt-4 mb-8">
@@ -44,7 +68,7 @@ const Profile = () => {
                             <p className="-mt-2">Street: Crimson Planes, n1374</p>
                             <p className="-mt-3">Neighborhood: Centro</p>
 
-                            <i className="pi pi-pencil edit-icon"></i>
+                            <i className="pi pi-pencil edit-icon" onClick={() => setShowDialog(true)}></i>
                         </div>
                         <div className="mini-card in-progress">
                             <h3>
@@ -79,6 +103,47 @@ const Profile = () => {
                     </div>
                 </div>
             </Card>
+
+            <Dialog header="Edit Address" visible={showDialog} style={{ width: '400px' }} modal onHide={() => setShowDialog(false)}>
+                <div className="p-fluid">
+                    <div className="p-field">
+                        <label htmlFor="state">State</label>
+                        <InputText id="state" name="state" value={formData.state} onChange={handleInputChange} />
+                    </div>
+
+                    <div className="p-field">
+                        <label htmlFor="city">City</label>
+                        <InputText id="city" name="city" value={formData.city} onChange={handleInputChange} />
+                    </div>
+
+                    <div className="p-field">
+                        <label htmlFor="street">ZIP Code</label>
+                        <InputText id="street" name="street" value={formData.street} onChange={handleInputChange} />
+                    </div>
+
+                    <div className="p-field">
+                        <label htmlFor="street">Street</label>
+                        <InputText id="street" name="street" value={formData.street} onChange={handleInputChange} />
+                    </div>
+
+                    <div className="p-field">
+                        <label htmlFor="number">Number</label>
+                        <InputText id="number" name="number" value={formData.number} onChange={handleInputChange} />
+                    </div>
+
+                    <div className="p-field">
+                        <label htmlFor="neighborhood">Neighborhood</label>
+                        <InputText id="neighborhood" name="neighborhood" value={formData.neighborhood} onChange={handleInputChange} />
+                    </div>
+
+                    <div className="p-field">
+                        <label htmlFor="additionalInfo">Additional Info (Optional)</label>
+                        <InputText id="additionalInfo" name="additionalInfo" value={formData.additionalInfo} onChange={handleInputChange} />
+                    </div>
+
+                    <Button label="Save" onClick={handleSubmit} />
+                </div>
+            </Dialog>
         </div>
     );
 }; export default Profile;
