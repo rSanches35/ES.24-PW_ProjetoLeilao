@@ -80,31 +80,19 @@
     transition: color 0.3s ease;
 }
 
-.grid-profile .edit-icon:hover { color: #6366F1;}
+.grid-profile .edit-icon:hover { color: #8688ff;}
 
-/* Comportamento Responsivo */
 
-/* Quando a tela for menor que 960px */
+
 @media (max-width: 1000px) {
-    .grid-profile {
-        grid-template-columns: 1fr; /* Seção 1 e 2 empilhadas, cada uma ocupa 100% */
-    }
-    .grid-profile-sec-2 {
-        border-right: none; /* Removendo a borda divisória entre seções quando empilhadas */
-        border-bottom: 1px solid #ddd; /* Adicionando borda abaixo da seção 1 para separação */
-    }
-    .grid-profile-sec-2 {
-        grid-template-columns: 1fr; /* Mini-cards em uma coluna */
-    }
+
+    .grid-profile { grid-template-columns: 1fr;}
+    .grid-profile-sec-2 { border-right: none; border-bottom: 1px solid #ddd;}
+    .grid-profile-sec-2 { grid-template-columns: 1fr;}
 }
 
-/* Quando a tela for menor que 600px */
 @media (max-width: 600px) {
-    .grid-profile-sec-1 {
-        padding: 1rem; /* Reduzindo o padding para telas muito pequenas */
-    }
-    .grid-profile-sec-2 {
-        padding: 1rem;
-        grid-template-columns: 1fr; /* Mini-cards ocupam 100% do espaço disponível */
-    }
+
+    .grid-profile-sec-1 { padding: 1rem;}
+    .grid-profile-sec-2 { padding: 1rem; grid-template-columns: 1fr;}
 }

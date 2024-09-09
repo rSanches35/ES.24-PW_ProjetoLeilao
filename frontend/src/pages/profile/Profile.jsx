@@ -9,7 +9,7 @@ import { Avatar } from 'primereact/avatar';
 const Profile = () => {
 
     return (
-        <div className="body-profile flex justify-content-center mt-6 mb-8">
+        <div className="body-profile flex justify-content-center mt-4 mb-8">
             <Helmet><title>Profile - Maxin'UP</title></Helmet>
             <Card className="card-profile">
                 <div className="grid-profile">
