@@ -13,7 +13,8 @@ const DefaultLayout = ({ children }) => {
 
     const location = useLocation();
     const pageConfig = {
-        '/': { title: t('dashboard'), icon: 'pi pi-chart-bar' },
+        '/': { title: t('home'), icon: 'pi pi-home' },
+        '/dashboard': { title: t('dashboard'), icon: 'pi pi-chart-bar' },
         '/profile': { title: t('profile'), icon: 'pi pi-user' },
     };
     const currentConfig = pageConfig[location.pathname];

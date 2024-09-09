@@ -7,6 +7,7 @@ import DefaultLayout from './components/DefaultLayout';
 import SimpleLayout from './components/SimpleLayout';
 
 import ForgotPassword from './pages/forgot-password/ForgotPassword';
+import Dashboard from './pages/dashboard/Dashboard';
 import Register from './pages/register/Register';
 import Profile from './pages/profile/Profile';
 import Login from './pages/login/Login';
@@ -21,6 +22,7 @@ function App() {
 
           <Route element={<PrivateRouter/>}>
             <Route path='/' element={<DefaultLayout><Home/></DefaultLayout>}/>
+            <Route path='/dashboard' element={<DefaultLayout><Dashboard/></DefaultLayout>} />
             <Route path='/profile' element={<DefaultLayout><Profile/></DefaultLayout>}/>
           </Route>
 

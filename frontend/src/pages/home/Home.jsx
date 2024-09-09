@@ -7,7 +7,7 @@ const Home = () =>{
 
     return(
         <div className="body-home">
-            <Helmet><title>Dashboard - Maxin'UP</title></Helmet>
+            <Helmet><title>Home - Maxin'UP</title></Helmet>
         </div>
     );
 }; export default Home;
