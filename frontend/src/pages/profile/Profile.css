@@ -83,7 +83,6 @@
 .grid-profile .edit-icon:hover { color: #8688ff;}
 
 
-
 @media (max-width: 1000px) {
 
     .grid-profile { grid-template-columns: 1fr;}
