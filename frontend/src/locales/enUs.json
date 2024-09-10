@@ -38,5 +38,7 @@
     "city": "City",
     "number": "Number",
     "notes": "Notes",
-    "save": "Save"
+    "save": "Save",
+
+    "sales": "Sales"
 }
