@@ -4,6 +4,7 @@ import com.leilao.backend.model.Profile;
 import com.leilao.backend.service.ProfileService;
 
 import java.util.List;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -24,8 +25,8 @@ public class ProfileController {
     @PostMapping("/submit")
     public Profile create(@RequestBody Profile profile) { return profileService.create(profile);}
 
-    @PostMapping
-    public Profile update(@RequestBody Profile profile) {return profileService.create(profile);}
+    @PutMapping
+    public Profile update(@RequestBody Profile profile) { return profileService.create(profile);}
 
     @DeleteMapping("/{id}")
     public void delete(@PathVariable("id") Long id) { profileService.delete(id);}

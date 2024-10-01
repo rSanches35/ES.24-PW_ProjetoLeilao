@@ -21,14 +21,8 @@ public class PersonService {
         Person personSaved = personRepository.findById(person.getId_person())
             .orElseThrow(()-> new NoSuchElementException("Objeto não Encontrado"));
         personSaved.setName(person.getName());
+        personSaved.setEmail(person.getEmail());
         return personRepository.save(personSaved);
-    }
-
-    public void delete(Long id){
-
-        Person personSaved = personRepository.findById(id)
-            .orElseThrow(()-> new NoSuchElementException("Objeto não Encontrado"));
-        personRepository.delete(personSaved);
     }
 }
 

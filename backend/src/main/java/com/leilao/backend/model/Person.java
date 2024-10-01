@@ -2,6 +2,7 @@ package com.leilao.backend.model;
 
 import lombok.Data;
 import jakarta.persistence.Id;
+import java.time.LocalDateTime;
 import jakarta.persistence.Table;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Column;
@@ -23,4 +24,10 @@ public class Person {
 
     @Column(name = "password")
     private String password;
+
+    @Column(name = "validatin_code")
+    private String validatinCode;
+
+    @Column(name = "validatin_code_date")
+    private LocalDateTime validationCodeDate;
 }
