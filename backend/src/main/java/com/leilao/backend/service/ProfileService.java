@@ -1,12 +1,11 @@
 package com.leilao.backend.service;
 
 import com.leilao.backend.model.Profile;
-import org.springframework.stereotype.Service;
 import com.leilao.backend.repository.ProfileRepository;
 
-import java.util.NoSuchElementException;
-
 import java.util.List;
+import java.util.NoSuchElementException;
+import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 
 
