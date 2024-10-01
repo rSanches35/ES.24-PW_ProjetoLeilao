@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.beans.factory.annotation.Autowired;
 
-
 @RestController
 @RequestMapping("/api/person")
 public class PersonController {
@@ -19,8 +18,12 @@ public class PersonController {
     private PersonService personService;
 
     @PostMapping("/submit")
-    public Person create(@RequestBody Person person) { return personService.create(person);}
+    public Person create(@RequestBody Person person) {
+        return personService.create(person);
+    }
 
     @PutMapping
-    public Person update(@RequestBody Person person) { return personService.create(person);}
+    public Person update(@RequestBody Person person) {
+        return personService.create(person);
+    }
 }
