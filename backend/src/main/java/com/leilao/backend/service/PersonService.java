@@ -1,11 +1,14 @@
 package com.leilao.backend.service;
 
 import com.leilao.backend.model.Person;
+import com.leilao.backend.model.dto.PersonChangePasswordDTO;
 import com.leilao.backend.repository.PersonRepository;
 
 import java.util.Random;
 import org.thymeleaf.context.Context;
 import jakarta.mail.MessagingException;
+
+import java.time.LocalDateTime;
 import java.util.NoSuchElementException;
 import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,6 +52,60 @@ public class PersonService implements UserDetailsService {
         }
 
         return personCreated;
+    }
+
+    public Person recoverPassword(String email) {
+
+        Person person = personRepository.findByEmail(email).orElseThrow(() -> new UsernameNotFoundException("User not Found"));
+
+        String code = codeGenerate();
+
+        person.setValidationCode(code);
+        person.setValidationCodeDate(LocalDateTime.now().plusMinutes(5));
+        personRepository.save(person);
+
+        Context context = new Context();
+        context.setVariable("name", person.getName());
+        context.setVariable("code", code);
+
+        try {
+            emailService.sendTemplateEmail(person.getEmail(), "Recuperar", context, "emailRecover");
+        } catch (MessagingException e) {
+            e.printStackTrace();
+        }
+
+        return person;
+    }
+
+    public Person changePassword(PersonChangePasswordDTO dto){
+
+        Person person = personRepository.findByEmail(dto.getEmail()).orElseThrow(() -> new UsernameNotFoundException("User not Found"));
+
+        if(dto.getValidationCode().equals(person.getValidationCode()) && person.getValidationCodeDate().isAfter(LocalDateTime.now())){
+
+            person.setPassword(dto.getPassword());
+            person.setValidationCode(null);
+            person.setValidationCodeDate(null);
+
+            personRepository.save(person);
+            return person;
+        }
+        else { throw new IllegalArgumentException("Invalid Validation Code");}
+    }
+
+    public Person activate(String validationCode){
+
+        Person person = personRepository.findByValidationCode(validationCode).orElseThrow(() -> new UsernameNotFoundException("User not Found"));
+
+        if(person.getValidationCode().equals(validationCode)) {
+
+            person.setActive(true);
+            person.setValidationCode(null);
+
+            personRepository.save(person);
+            return person;
+        }
+        else { throw new IllegalArgumentException("Invalid Validation Code");}
     }
 
     public Person update(Person person) {
