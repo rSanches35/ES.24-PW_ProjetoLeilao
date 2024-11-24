@@ -3,11 +3,11 @@ package com.leilao.backend.service;
 import com.leilao.backend.model.Person;
 import com.leilao.backend.repository.PersonRepository;
 
+import java.util.Random;
+import org.thymeleaf.context.Context;
 import jakarta.mail.MessagingException;
-
 import java.util.NoSuchElementException;
 import org.springframework.stereotype.Service;
-import org.thymeleaf.context.Context;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -17,21 +17,30 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 @Service
 public class PersonService implements UserDetailsService {
     
+    Random random = new Random();
+
     @Autowired
     private PersonRepository personRepository;
 
     @Autowired
     private EmailService emailService;
 
+    public String codeGenerate(){
+
+        return ("" + (100000 + random.nextInt(900000)));
+    }
+
     public Person create(Person person) { 
 
-        person.setValidationCode("123");
+        String code = codeGenerate();
+        person.setValidationCode(code);
+
         Person personCreated;
         personCreated = personRepository.save(person);
+        
         Context context = new Context();
         context.setVariable("name", personCreated.getName());
-
-        context.setVariable("code", "123");
+        context.setVariable("code", code);
 
         try {
             emailService.sendTemplateEmail(personCreated.getEmail(), "Cadastro", context, "emailWelcome");

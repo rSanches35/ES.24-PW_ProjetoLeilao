@@ -1,27 +1,23 @@
 package com.leilao.backend.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import com.leilao.backend.model.Person;
+import com.leilao.backend.security.JwtService;
+import com.leilao.backend.service.PersonService;
+
+import jakarta.validation.Valid;
 import org.springframework.security.core.Authentication;
+import com.leilao.backend.model.dto.PersonAuthRequestDTO;
+import com.leilao.backend.model.dto.PersonAuthResponseDTO;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 
-import com.leilao.backend.model.Person;
-import com.leilao.backend.model.dto.PersonAuthRequestDTO;
-import com.leilao.backend.model.dto.PersonAuthResponseDTO;
-import com.leilao.backend.security.JwtService;
-import com.leilao.backend.service.EmailService;
-import com.leilao.backend.service.PersonService;
-
-import org.thymeleaf.context.Context;
-
-import jakarta.mail.MessagingException;
-import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/api/person")
@@ -42,7 +38,7 @@ public class PersonController {
         Authentication authentication = authenticationManager.authenticate(
             new UsernamePasswordAuthenticationToken(authRequest.getEmail(), authRequest.getPassword()));
         return new PersonAuthResponseDTO(
-                authRequest.getEmail(), jwtService.generateToken(authentication.getName()));
+            authRequest.getEmail(), jwtService.generateToken(authentication.getName()));
     }
 
     /* 
