@@ -1,8 +1,77 @@
 <html>
+    <head>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                background-color: #f4f7fa;
+                margin: 0;
+                padding: 0;
+                color: #333;
+            }
+            .container {
+                width: 100%;
+                max-width: 600px;
+                margin: 0 auto;
+                background-color: #fff;
+                padding: 20px;
+                border-radius: 8px;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            }
+            h2 {
+                color: #4CAF50;
+                text-align: center;
+            }
+            p {
+                font-size: 16px;
+                line-height: 1.5;
+            }
+            .code {
+                display: inline-block;
+                background-color: #f1f1f1;
+                padding: 10px;
+                border-radius: 5px;
+                font-family: 'Courier New', Courier, monospace;
+                font-size: 18px;
+                color: #333;
+            }
+            .footer {
+                text-align: center;
+                margin-top: 20px;
+                font-size: 14px;
+                color: #888;
+            }
+            .footer a {
+                color: #4CAF50;
+                text-decoration: none;
+            }
+            .cta-button {
+                display: block;
+                width: 100%;
+                max-width: 200px;
+                margin: 20px auto;
+                padding: 12px 20px;
+                background-color: #4CAF50;
+                color: white;
+                text-align: center;
+                text-decoration: none;
+                border-radius: 5px;
+                font-size: 16px;
+                font-weight: bold;
+            }
+        </style>
+    </head>
     <body>
-        <h2>Cadastro Efetuado com Sucesso!</h2>
-        <p>Olá, <span th:text="${name}"></span></p>
-        <p><span th:text="${code}"></span></p>
-        <p>Seja bem-vindo ao sistema de Leilão.</p>
+        <div class="container">
+            <h2>Cadastro Efetuado com Sucesso!</h2>
+            <p>Olá, <span th:text="${name}"></span>!</p>
+            <p>Seu código de acesso ao sistema de Leilão é:</p>
+            <p class="code"><span th:text="${code}"></span></p>
+            <p>Seja bem-vindo! Estamos muito felizes em ter você conosco.</p>
+            <a href="localhost:8080/login" class="cta-button">Acessar o Sistema</a>
+            <div class="footer">
+                <p>Se você não reconheceu essa ação, por favor, entre em contato com nossa equipe de suporte.</p>
+                <p>Atenciosamente, <br> Equipe de Leilão</p>
+            </div>
+        </div>
     </body>
 </html>
