@@ -49,7 +49,7 @@ public class Person implements UserDetails {
     @Column(name = "validation_code")
     private String validationCode;
 
-    @Column(name = "validatin_code_date")
+    @Column(name = "validation_code_date")
     private LocalDateTime validationCodeDate;
 
     @Column(name = "active")
