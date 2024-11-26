@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.scheduling.annotation.Async;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
 
@@ -47,6 +48,7 @@ public class EmailService {
      * @param templateFileName o nome do arquivo html de template
      * @throws MessagingException se ocorrer um erro ao enviar o email
      */
+    @Async
     public void sendTemplateEmail(String to, String subject, Context emailVariables, String templateFileName)
             throws MessagingException {
 
