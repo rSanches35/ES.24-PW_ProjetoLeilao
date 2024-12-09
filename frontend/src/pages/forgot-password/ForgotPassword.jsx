@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Helmet } from 'react-helmet';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import './ForgotPassword.css'
 
@@ -11,11 +11,21 @@ import { Password } from 'primereact/password';
 import { InputOtp } from 'primereact/inputotp';
 import { InputText } from 'primereact/inputtext';
 
+import PersonService from "../../services/PersonService";
+
 
 const ForgotPassword = () => {
 
-    const [currentSection, setCurrentSection] = useState(1);
+    const personService = new PersonService;
 
+    const [currentSection, setCurrentSection] = useState(1);
+    const [isFormValid1, setIsFormValid1] = useState(false);
+    const [isFormValid2, setIsFormValid2] = useState(false);
+    const [isFormValid3, setIsFormValid3] = useState(false);
+
+    const navigate = useNavigate();
+    const [otp, setOtp] = useState("");
+    const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [passwordConfirm, setPasswordConfirm] = useState("");
     const [errorMessage, setErrorMessage] = useState("");
@@ -56,35 +66,14 @@ const ForgotPassword = () => {
         </ul>
         </>
     );
-  
-    const onPasswordChange = (e) => {
-
-        const typedPassword = e.target.value;
-
-        setPassword(typedPassword);
-        setPasswordRequirements({
-            minLength: typedPassword.length >= 6,
-            hasLowerCase: /[a-z]/.test(typedPassword),
-            hasUpperCase: /[A-Z]/.test(typedPassword),
-            hasNumber: /[0-9]/.test(typedPassword),
-            hasSpecialChar: /[!@#$%^&*(),.?":{}|<>]/.test(typedPassword),
-        });
-    };
-  
-    const onPasswordConfirmChange = (e) => {
-
-        const passwordConfirm = e.target.value;
-
-        setPasswordConfirm(passwordConfirm);
-        if (password !== passwordConfirm) { setErrorMessage("Passwords are different");}
-        else { setErrorMessage("");}
-    };
-
 
     const [minutes, setMinutes] = useState(5);
     const [seconds, setSeconds] = useState(0);
 
     useEffect(() => {
+
+        const isFormFilled2 = otp.length === 5;
+        setIsFormValid2(isFormFilled2);
 
         if (currentSection === 2) {
             const interval = setInterval(() => {
@@ -98,11 +87,75 @@ const ForgotPassword = () => {
 
             return () => clearInterval(interval);
         }
-    }, [minutes, seconds, currentSection]);
 
-    const handleNext = () => {
-        setCurrentSection(prevSection => prevSection + 1);
+        const isPasswordsEqual = password === passwordConfirm;
+        const arePasswordCriteriaMet = Object.values(passwordRequirements).every(Boolean);
+        setIsFormValid3(isPasswordsEqual && arePasswordCriteriaMet);
+
+    }, [minutes, seconds, currentSection,
+        [otp],
+        [password, passwordConfirm, passwordRequirements]]);
+
+    const handleOtpChange = (value) => {
+        setOtp(value);
     };
+
+    const handlePasswordChange = (e) => {
+        const password = e.target.value;
+        setPassword(password);
+        setPasswordRequirements({
+            minLength: password.length >= 6,
+            hasUpperCase: /[A-Z]/.test(password),
+            hasLowerCase: /[a-z]/.test(password),
+            hasNumber: /[0-9]/.test(password),
+            hasSpecialChar: /[!@#$%^&*(),.?":{}|<>_\-\\]/.test(password), // O '\\' é necessario para não ficar como palavra reservada.
+        });
+    };
+
+    const handlePasswordConfirmation = (e) => {
+        const passwordConfirm = e.target.value;
+        setPasswordConfirm(passwordConfirm);
+        if (password !== passwordConfirm) {
+            setErrorMessage("As senhas devem ser iguais.");
+        } else {
+            setErrorMessage("");
+        }
+    };
+
+    const handleNext = async () => {
+        
+        if(currentSection == 1){
+            try{
+                const response = await personService.recoverSendEmail(email);
+                if(response){ setCurrentSection(prevSection => prevSection + 1);}
+                setErrorMessage(null);
+            }
+            catch(error){ setErrorMessage("Erro ao enviar o código para o Email"); alert(errorMessage);}
+        };
+
+        if(currentSection == 2){
+            try{
+                const response = await personService.recoverVerifyCode(otp);
+                if(response){ setCurrentSection(prevSection => prevSection + 1);}
+                setErrorMessage(null);
+            }
+            catch(error){ setErrorMessage("Código Inválido"); alert(errorMessage);}
+        }
+
+        if(currentSection == 3){
+
+            alert(email, password);
+            console.log(email, password);
+
+            if(password == passwordConfirm) {
+                try{
+                    const response = await personService.recoverChangePassword({email, password});
+                    if(response){ navigate("/login")}
+                }
+                catch(error){ setErrorMessage("Erro ao alterar a Senha"); alert(errorMessage);}
+            }
+        }
+    }
 
     const handleBack = () => {
         setCurrentSection(prevSection => prevSection - 1);
@@ -119,8 +172,9 @@ const ForgotPassword = () => {
                 <>
 
                 <InputText
-                placeholder="E-Mail"
-                className="mt-5 w-10"
+                value={email}
+                id="email"
+                onChange={(e) => setEmail(e.target.value)}
                 />
 
                 <Button
@@ -160,12 +214,13 @@ const ForgotPassword = () => {
                 <InputOtp
                 length={6}
                 integerOnly
+                onChange={(e) => handleOtpChange(e.value)}
                 />
 
                 </div>
 
                 <Button
-                label="Next"
+                label="Verify Code"
                 className="mt-5 mb-3 px-6"
                 onClick={handleNext}
                 />
@@ -192,10 +247,10 @@ const ForgotPassword = () => {
                 className="mt-3 w-10"
                 inputStyle={{ width: '100%' }}
 
+                onChange={handlePasswordChange}
+
                 header={header}
                 footer={footer}
-                value={password}
-                onChange={onPasswordChange}
                 />
 
                 <Password
@@ -205,17 +260,15 @@ const ForgotPassword = () => {
                 className="mt-3 w-10"
                 inputStyle={{ width: '100%' }}
 
-                value={passwordConfirm}
-                onChange={onPasswordConfirmChange}
+                onChange={handlePasswordConfirmation}
                 />
 
                 {errorMessage && <p className="text-red-500">{errorMessage}</p>}
 
-                <Link to="/login" className="w-full">
-                    <Button
-                    label="Next"
-                    className="mt-5 mb-3 px-6"/>
-                </Link>
+                <Button
+                label="Change"
+                className="mt-5 mb-3 px-6"
+                onClick={handleNext}/>
 
                 <div className="flex flex-column align-items-center">
 

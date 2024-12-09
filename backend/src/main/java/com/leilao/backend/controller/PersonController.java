@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.lang.reflect.Executable;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -78,17 +77,24 @@ public class PersonController {
         return personService.create(person);
     }
 
-    @PostMapping("/recover")
-    public Person recover(@RequestBody Map<String, String> request){
-
-        String email = request.get("email");
-        return personService.recoverPassword(email);
+    @PostMapping("/recover-email")
+    public String recoverSendEmail(@RequestBody Map<String, String> json){
+        String email = json.get("email");
+        return personService.recoverSendEmail(email);
     }
 
-    @PostMapping("/change")
-    public Person change(@RequestBody PersonChangePasswordDTO dto){
+    @PostMapping("/recover-code")
+    public Person recoverVerifyCode(@RequestBody Map<String, String> request){
+        String validationCode = request.get("validationCode");
+        return personService.recoverVerifyCode(validationCode);
+    }
 
-        return personService.changePassword(dto);
+    @PostMapping("/recover-change")
+    public Person recoverChangePassword(@RequestBody PersonChangePasswordDTO dto){
+
+        System.out.println(dto.getEmail());
+        System.out.println(dto.getPassword());
+        return personService.recoverChangePassword(dto);
     }
 
     @PostMapping("/activate")

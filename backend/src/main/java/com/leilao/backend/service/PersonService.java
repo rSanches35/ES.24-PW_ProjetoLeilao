@@ -54,6 +54,7 @@ public class PersonService implements UserDetailsService {
         return personCreated;
     }
 
+    /* 
     public Person recoverPassword(String email) {
 
         Person person = personRepository.findByEmail(email).orElseThrow(() -> new UsernameNotFoundException("User not Found"));
@@ -84,13 +85,69 @@ public class PersonService implements UserDetailsService {
         if(dto.getValidationCode().equals(person.getValidationCode()) && person.getValidationCodeDate().isAfter(LocalDateTime.now())){
 
             person.setPassword(dto.getPassword());
-            person.setValidationCode(null);
             person.setValidationCodeDate(null);
 
             personRepository.save(person);
             return person;
         }
         else { throw new IllegalArgumentException("Invalid Validation Code");}
+    }
+    */
+
+    public String recoverSendEmail(String email) {
+
+        System.out.println(email);
+        Person user = personRepository.findByEmail(email).orElseThrow(() -> new UsernameNotFoundException("User not Found"));
+
+        String code = codeGenerate();
+
+        user.setValidationCode(code);
+        user.setValidationCodeDate(LocalDateTime.now().plusMinutes(5));
+        personRepository.save(user);
+
+        Context context = new Context();
+        context.setVariable("name", user.getName());
+        context.setVariable("code", code);
+
+        try {
+            emailService.sendTemplateEmail(user.getEmail(), "Recuperar", context, "emailRecover");
+        } catch (MessagingException e) {
+            e.printStackTrace();
+        }
+
+        return "Email enviado!";
+    }
+
+
+    // --------------- RECOVER VALIDATION CODE ---------------
+
+    public Person recoverVerifyCode(String validationCode){
+
+        Person user = personRepository.findByValidationCode(validationCode).orElseThrow(() -> new UsernameNotFoundException("User not Found"));
+
+        if(user.getValidationCode().equals(validationCode) && user.getValidationCodeDate().isAfter(LocalDateTime.now())){
+
+            user.setValidationCode(null);
+            user.setValidationCodeDate(null);
+
+            personRepository.save(user);
+            return user;
+        }
+        else { throw new IllegalArgumentException("Invalid Validation Code");}
+    }
+
+    
+    // --------------- RECOVER CHANGE PASSWORD ---------------
+
+    public Person recoverChangePassword(PersonChangePasswordDTO dto){
+
+        System.out.println(dto.getEmail() + "   " +dto.getPassword());
+        Person person = personRepository.findByEmail(dto.getEmail()).orElseThrow(() -> new UsernameNotFoundException("User not Found"));
+
+        person.setPassword(dto.getPassword());
+
+        personRepository.save(person);
+        return person;
     }
 
     public Person activate(String validationCode){
