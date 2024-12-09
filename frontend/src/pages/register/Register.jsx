@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Helmet } from 'react-helmet';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import './Register.css'
 
@@ -11,9 +11,22 @@ import { Password } from 'primereact/password';
 import { Calendar } from 'primereact/calendar';
 import { InputText } from 'primereact/inputtext';
 import { InputMask } from 'primereact/inputmask';
-        
+
+import PersonService from "../../services/PersonService";
+
 
 const Register = () => {
+
+    const navigate = useNavigate();
+    const personService = new PersonService;
+
+    const [user, setUser] = useState({
+        name: "", 
+        email: "",
+        phone: "",
+        birthDate: "",
+        password: "",
+    });
 
     const [password, setPassword] = useState("");
     const [passwordConfirm, setPasswordConfirm] = useState("");
@@ -56,11 +69,31 @@ const Register = () => {
         </>
     );
   
-    const onPasswordChange = (e) => {
+    const handleChange = (input) => {
+
+        setUser({ ...user, [input.target.name]: input.target.value });
+    }
+
+    const handleBirthDate = (input) => {
+
+        const dataI = input.target.value;
+
+        const ano = dataI.getFullYear();
+        const mes = String(dataI.getMonth() + 1).padStart(2, '0');
+        const dia = String(dataI.getDate()).padStart(2, '0');
+
+        const dataF = `${ano}-${mes}-${dia}`;
+        setUser({ ...user, [input.target.name]: dataF });
+
+        console.log(user.birthDate);
+    }
+
+    const handlePasswordChange = (e) => {
 
         const typedPassword = e.target.value;
 
         setPassword(typedPassword);
+        setUser({ ...user, [e.target.name]: e.target.value });
         setPasswordRequirements({
             minLength: typedPassword.length >= 6,
             hasLowerCase: /[a-z]/.test(typedPassword),
@@ -68,16 +101,35 @@ const Register = () => {
             hasNumber: /[0-9]/.test(typedPassword),
             hasSpecialChar: /[!@#$%^&*(),.?":{}|<>]/.test(typedPassword),
         });
-    };
-  
-    const onPasswordConfirmChange = (e) => {
 
+        if (password !== passwordConfirm) { setErrorMessage("Passwords are different"); }
+        else { setErrorMessage(""); }
+    };
+
+    const handlePasswordConfirmation = (e) => {
+        
         const passwordConfirm = e.target.value;
-
         setPasswordConfirm(passwordConfirm);
-        if (password !== passwordConfirm) { setErrorMessage("Passwords are different");}
-        else { setErrorMessage("");}
+
+        if (password !== passwordConfirm) { setErrorMessage("Passwords are different"); }
+        else { setErrorMessage(""); }
     };
+
+    const register = async () => {
+
+        try {
+            console.log(user);
+            const response = await personService.register(user);
+            if (response) {
+                localStorage.setItem("user", JSON.stringify(response));
+                navigate("/");
+            }
+        } catch (error){
+
+            console.log(user);
+            console.log(error);
+        }
+    }
 
     return (
         <div className="body-register">
@@ -87,48 +139,55 @@ const Register = () => {
             className="pt-5 md:w-25rem flex flex-column align-items-center text-center">
                 
                 <InputText
+                name="name"
                 placeholder="Full Name"
                 className="mt-5 w-10"
+                onChange={handleChange}
                 />
 
                 <InputText
+                name="email"
                 placeholder="E-Mail"
                 className="mt-3 w-10"
+                onChange={handleChange}
                 />
 
                 <InputMask
+                name="phone"
                 mask="(99) 9 9999-9999"
                 placeholder="Phone"
-                className="mt-3 w-10">
+                className="mt-3 w-10"
+                onChange={handleChange}>
                 </InputMask>
 
                 <Calendar
+                name="birthDate"
                 placeholder="Birth Date"
                 className="mt-3 w-10"
                 touchUI
+                onChange={handleBirthDate}
                 />
 
                 <Password
+                name="password"
                 placeholder="Password"
                 toggleMask
                 className="mt-3 w-10"
                 inputStyle={{ width: '100%' }}
+                onChange={handlePasswordChange}
 
                 header={header}
                 footer={footer}
-                value={password}
-                onChange={onPasswordChange}
                 />
 
                 <Password
+                name="passwordConfirm"
                 placeholder="Confirm Password"
                 toggleMask
                 feedback={false}
                 className="mt-3 w-10"
                 inputStyle={{ width: '100%' }}
-
-                value={passwordConfirm}
-                onChange={onPasswordConfirmChange}
+                onChange={handlePasswordConfirmation}
                 />
 
                 {errorMessage && <p className="text-red-500">{errorMessage}</p>}
@@ -136,6 +195,7 @@ const Register = () => {
                 <Button
                 label="Register"
                 className="mt-5 mb-3 px-6"
+                onClick={register}
                 />
 
                 <div className="flex flex-column align-items-center">

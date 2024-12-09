@@ -61,7 +61,6 @@ public class PersonController {
 
     @PostMapping
     public Person create(@Valid @RequestBody Person person) {
-
         return personService.create(person);
     }
 
