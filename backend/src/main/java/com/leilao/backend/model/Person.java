@@ -15,6 +15,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 import lombok.AccessLevel;
 import jakarta.persistence.Id;
+
+import java.sql.Date;
 import java.time.LocalDateTime;
 import jakarta.persistence.Table;
 import jakarta.persistence.Entity;
@@ -24,6 +26,7 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.GeneratedValue;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.NotBlank;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -41,6 +44,9 @@ public class Person implements UserDetails {
 
     @Column(unique = true) @NotBlank(message =  "Email is Required")
     private String email;
+
+    @Column(name = "birth_date") @NotNull(message =  "Birth Date is Required")
+    private Date birthDate;
 
     @NotBlank(message =  "Password is Required")
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)

@@ -5,6 +5,15 @@ class PersonService extends BaseService {
     super("person");
   }
 
+  //REGISTER
+  async register(person) {
+
+    const response = await this.api.post(
+      `${this.endPoint}`,person
+    );
+    return response.data;
+  }
+
   //LOGIN
   async login(credentials) {
     const response = await this.api.post(`${this.endPoint}/login`, credentials);
@@ -39,6 +48,6 @@ class PersonService extends BaseService {
     return response.data;
   }
 
-  
+
 }
 export default PersonService;

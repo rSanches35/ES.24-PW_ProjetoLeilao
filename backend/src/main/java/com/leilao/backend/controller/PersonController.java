@@ -59,13 +59,6 @@ public class PersonController {
         else { throw new IllegalArgumentException("User not Active");}
     }
 
-    /* 
-    @PostMapping("/password-code-request")
-    public String passwordCodeRequest(@RequestBody PersonAuthRequestDTO person) {
-        return personService.passwordCodeRequest(person);
-    }
-    */
-
     @PostMapping
     public Person create(@Valid @RequestBody Person person) {
 
