@@ -11,6 +11,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import com.leilao.backend.model.dto.PersonAuthRequestDTO;
 import com.leilao.backend.model.dto.PersonAuthResponseDTO;
 import com.leilao.backend.model.dto.PersonChangePasswordDTO;
+import com.leilao.backend.model.dto.PersonVerifyCodeDTO;
 import com.leilao.backend.repository.PersonRepository;
 
 import org.springframework.web.bind.annotation.PutMapping;
@@ -76,16 +77,14 @@ public class PersonController {
     }
 
     @PostMapping("/recover-code")
-    public Person recoverVerifyCode(@RequestBody Map<String, String> request){
-        String validationCode = request.get("validationCode");
-        return personService.recoverVerifyCode(validationCode);
+    public Person recoverVerifyCode(@RequestBody PersonVerifyCodeDTO dto){
+
+        return personService.recoverVerifyCode(dto);
     }
 
     @PostMapping("/recover-change")
     public Person recoverChangePassword(@RequestBody PersonChangePasswordDTO dto){
 
-        System.out.println(dto.getEmail());
-        System.out.println(dto.getPassword());
         return personService.recoverChangePassword(dto);
     }
 

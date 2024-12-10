@@ -14,7 +14,7 @@ class PersonService extends BaseService {
     return response.data;
   }
 
-  //REGISTER
+  //A
   async activate(validationCode) {
 
     const response = await this.api.post(
@@ -24,8 +24,8 @@ class PersonService extends BaseService {
   }
 
   //LOGIN
-  async login(credentials) {
-    const response = await this.api.post(`${this.endPoint}/login`, credentials);
+  async login(person) {
+    const response = await this.api.post(`${this.endPoint}/login`, person);
     return response.data;
   }
 
@@ -40,10 +40,10 @@ class PersonService extends BaseService {
   }
 
     //Recover (2/3- VerifyCode
-  async recoverVerifyCode(validationCode) {
+  async recoverVerifyCode(person) {
 
     const response = await this.api.post(
-      `${this.endPoint}/recover-code`,{validationCode}
+      `${this.endPoint}/recover-code`,person
     );
     return response.data;
   }

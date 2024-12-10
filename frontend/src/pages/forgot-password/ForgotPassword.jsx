@@ -19,12 +19,14 @@ const ForgotPassword = () => {
     const personService = new PersonService;
 
     const [currentSection, setCurrentSection] = useState(1);
-    const [isFormValid1, setIsFormValid1] = useState(false);
-    const [isFormValid2, setIsFormValid2] = useState(false);
-    const [isFormValid3, setIsFormValid3] = useState(false);
 
     const navigate = useNavigate();
     const [otp, setOtp] = useState("");
+    const [user, setUser] = useState({
+        email: "",
+        validaion_code: "",
+    });
+
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [passwordConfirm, setPasswordConfirm] = useState("");
@@ -72,9 +74,6 @@ const ForgotPassword = () => {
 
     useEffect(() => {
 
-        const isFormFilled2 = otp.length === 5;
-        setIsFormValid2(isFormFilled2);
-
         if (currentSection === 2) {
             const interval = setInterval(() => {
                 if (seconds > 0) {
@@ -87,10 +86,6 @@ const ForgotPassword = () => {
 
             return () => clearInterval(interval);
         }
-
-        const isPasswordsEqual = password === passwordConfirm;
-        const arePasswordCriteriaMet = Object.values(passwordRequirements).every(Boolean);
-        setIsFormValid3(isPasswordsEqual && arePasswordCriteriaMet);
 
     }, [minutes, seconds, currentSection,
         [otp],
@@ -134,12 +129,18 @@ const ForgotPassword = () => {
         };
 
         if(currentSection == 2){
+
+            setUser({email: email, validaion_code: otp});
+
             try{
-                const response = await personService.recoverVerifyCode(otp);
+                const response = await personService.recoverVerifyCode(user);
                 if(response){ setCurrentSection(prevSection => prevSection + 1);}
                 setErrorMessage(null);
             }
-            catch(error){ setErrorMessage("Código Inválido"); alert(errorMessage);}
+            catch(error){ setErrorMessage("Código Inválido");
+                console.log(user.email);
+                console.log(user.validaion_code);
+                console.log("");}
         }
 
         if(currentSection == 3){
