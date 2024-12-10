@@ -33,7 +33,7 @@ const Login = () => {
         if (event.key === 'Enter') { login();}
     }
 
-    const login = async () =>{
+    const login = async () => {
 
         try {
             console.log(user);
@@ -85,13 +85,20 @@ const Login = () => {
                     <Button
                     label="Forgot your Password?"
                     link
-                    className="-mb-3"/>
+                    className="mt-2 -mb-3"/>
+                </Link>
+
+                <Link to="/validate" className="w-full">
+                    <Button
+                    label="Validate your Account"
+                    link/>
                 </Link>
 
                 <Link to="/register" className="w-full">
                     <Button
                     label="Create Account"
-                    link/>
+                    link
+                    className="-mt-3" />
                 </Link>
 
                 </div>

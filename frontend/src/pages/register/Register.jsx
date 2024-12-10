@@ -122,13 +122,9 @@ const Register = () => {
             const response = await personService.register(user);
             if (response) {
                 localStorage.setItem("user", JSON.stringify(response));
-                navigate("/");
+                navigate("/login");
             }
-        } catch (error){
-
-            console.log(user);
-            console.log(error);
-        }
+        } catch (error){ alert(error); }
     }
 
     return (

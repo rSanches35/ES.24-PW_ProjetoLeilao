@@ -14,6 +14,15 @@ class PersonService extends BaseService {
     return response.data;
   }
 
+  //REGISTER
+  async activate(validationCode) {
+
+    const response = await this.api.post(
+      `${this.endPoint}/activate`, { validationCode }
+    );
+    return response.data;
+  }
+
   //LOGIN
   async login(credentials) {
     const response = await this.api.post(`${this.endPoint}/login`, credentials);
