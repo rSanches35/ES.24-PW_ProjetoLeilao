@@ -45,12 +45,18 @@ public class Person implements UserDetails {
     @Column(unique = true) @NotBlank(message =  "Email is Required")
     private String email;
 
+    @Column(unique = true)
+    private String phone;
+
     @Column(name = "birth_date") @NotNull(message =  "Birth Date is Required")
     private Date birthDate;
 
     @NotBlank(message =  "Password is Required")
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
+
+    @Column(name = "account_code")
+    private String accountCode;
 
     @Column(name = "validation_code")
     private String validationCode;

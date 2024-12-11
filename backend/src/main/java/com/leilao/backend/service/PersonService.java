@@ -36,7 +36,7 @@ public class PersonService implements UserDetailsService {
     public Person create(Person person) {
 
         String code = codeGenerate();
-        person.setValidationCode(code);
+        person.setAccountCode(code);
 
         Person personCreated;
         personCreated = personRepository.save(person);
@@ -127,7 +127,8 @@ public class PersonService implements UserDetailsService {
 
     public Person recoverVerifyCode(PersonVerifyCodeDTO dto) {
 
-        Person user = personRepository.findByEmail(dto.getEmail()).orElseThrow(() -> new UsernameNotFoundException("User not Found"));
+        Person user = personRepository.findByEmail(dto.getEmail())
+                .orElseThrow(() -> new UsernameNotFoundException("User not Found"));
 
         if (user.getValidationCode().equals(dto.getCode()) && user.getValidationCodeDate().isAfter(LocalDateTime.now())) {
 
@@ -145,7 +146,6 @@ public class PersonService implements UserDetailsService {
 
     public Person recoverChangePassword(PersonChangePasswordDTO dto) {
 
-        System.out.println(dto.getEmail() + "   " + dto.getPassword());
         Person person = personRepository.findByEmail(dto.getEmail())
                 .orElseThrow(() -> new UsernameNotFoundException("User not Found"));
 
@@ -155,18 +155,18 @@ public class PersonService implements UserDetailsService {
         return person;
     }
 
-    public Person activate(String validationCode) {
+    public Person activate(PersonVerifyCodeDTO dto) {
 
-        Person person = personRepository.findByValidationCode(validationCode)
+        Person user = personRepository.findByEmail(dto.getEmail())
                 .orElseThrow(() -> new UsernameNotFoundException("User not Found"));
 
-        if (person.getValidationCode().equals(validationCode)) {
+        if (user.getAccountCode().equals(dto.getCode())) {
 
-            person.setActive(true);
-            person.setValidationCode(null);
+            user.setActive(true);
+            user.setAccountCode("-1");
 
-            personRepository.save(person);
-            return person;
+            personRepository.save(user);
+            return user;
         } else {
             throw new IllegalArgumentException("Invalid Validation Code");
         }

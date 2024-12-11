@@ -9,23 +9,25 @@ class PersonService extends BaseService {
   async register(person) {
 
     const response = await this.api.post(
-      `${this.endPoint}`,person
+      `${this.endPoint}`, person
     );
     return response.data;
   }
 
   //A
-  async activate(validationCode) {
+  async activate(person) {
 
     const response = await this.api.post(
-      `${this.endPoint}/activate`, { validationCode }
+      `${this.endPoint}/activate`, person
     );
     return response.data;
   }
 
   //LOGIN
   async login(person) {
-    const response = await this.api.post(`${this.endPoint}/login`, person);
+    const response = await this.api.post(
+      `${this.endPoint}/login`, person
+    );
     return response.data;
   }
 
@@ -34,7 +36,7 @@ class PersonService extends BaseService {
   async recoverSendEmail(email) {
 
     const response = await this.api.post(
-      `${this.endPoint}/recover-email`,{email}
+      `${this.endPoint}/recover-email`, { email }
     );
     return response.data;
   }
@@ -43,7 +45,7 @@ class PersonService extends BaseService {
   async recoverVerifyCode(person) {
 
     const response = await this.api.post(
-      `${this.endPoint}/recover-code`,person
+      `${this.endPoint}/recover-code`, person
     );
     return response.data;
   }
@@ -52,7 +54,7 @@ class PersonService extends BaseService {
   async recoverChangePassword(person) {
 
     const response = await this.api.post(
-      `${this.endPoint}/recover-change`,person
+      `${this.endPoint}/recover-change`, person
     );
     return response.data;
   }

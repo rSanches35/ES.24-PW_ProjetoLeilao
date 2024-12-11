@@ -22,10 +22,6 @@ const ForgotPassword = () => {
 
     const navigate = useNavigate();
     const [otp, setOtp] = useState("");
-    const [user, setUser] = useState({
-        email: "",
-        validaion_code: "",
-    });
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -122,31 +118,25 @@ const ForgotPassword = () => {
         if(currentSection == 1){
             try{
                 const response = await personService.recoverSendEmail(email);
-                if(response){ setCurrentSection(prevSection => prevSection + 1);}
-                setErrorMessage(null);
+                if(response){ setCurrentSection(prevSection => prevSection + 1); setErrorMessage(null);}
             }
             catch(error){ setErrorMessage("Erro ao enviar o código para o Email"); alert(errorMessage);}
         };
 
         if(currentSection == 2){
 
-            setUser({email: email, validaion_code: otp});
-
             try{
-                const response = await personService.recoverVerifyCode(user);
-                if(response){ setCurrentSection(prevSection => prevSection + 1);}
-                setErrorMessage(null);
+                const response = await personService.recoverVerifyCode({email, code:  otp});
+                if(response){ setCurrentSection(prevSection => prevSection + 1); setErrorMessage(null);}
             }
             catch(error){ setErrorMessage("Código Inválido");
-                console.log(user.email);
-                console.log(user.validaion_code);
-                console.log("");}
+                console.log(email);
+                console.log(otp);
+                alert(error);
+            }
         }
 
         if(currentSection == 3){
-
-            alert(email, password);
-            console.log(email, password);
 
             if(password == passwordConfirm) {
                 try{

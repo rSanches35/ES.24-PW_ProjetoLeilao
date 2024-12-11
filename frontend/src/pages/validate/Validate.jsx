@@ -8,26 +8,18 @@ import './Validate.css'
 import { Card } from 'primereact/card';
 import { Button } from 'primereact/button';
 import { InputOtp } from 'primereact/inputotp';
+import { InputText } from 'primereact/inputtext';
 
 import PersonService from "../../services/PersonService";
 
 
 const Validate = () => {
 
+    const [email, setEmail] = useState("");
     const [otp, setOtp] = useState("");
 
     const navigate = useNavigate();
-    const [user, setUser] = useState({
-        email: "",
-        password: ""
-    });
-
     const personService = new PersonService;
-
-    const handleChange = (input) => {
-
-        setUser({ ...user, [input.target.name]: input.target.value });
-    }
 
     const handleKeyDown = (event) => {
 
@@ -37,16 +29,14 @@ const Validate = () => {
     const validate = async () => {
 
         try {
-            console.log(user);
-            const response = await personService.activate(otp);
+            const response = await personService.activate({email, code:  otp});
             if (response) {
-                localStorage.setItem("user", JSON.stringify(response));
                 navigate("/login");
             }
         } catch (error) {
 
-            console.log(user);
-            console.log(error);
+            console.log(email);
+            console.log(otp);
         }
     }
 
@@ -61,10 +51,19 @@ const Validate = () => {
             <Card title="Validate Account"
                 className="pt-5 md:w-25rem flex flex-column align-items-center text-center">
 
+                <InputText
+                value={email}
+                id="email"
+                className="mt-3 mb-3"
+                onChange={(e) => setEmail(e.target.value)}
+                onKeyDown={handleKeyDown}
+                />
+
                 <InputOtp
                 length={6}
                 integerOnly
-                onChange={(e) => handleOtpChange(e.value)}onKeyDown={handleKeyDown}
+                onChange={(e) => handleOtpChange(e.value)}
+                onKeyDown={handleKeyDown}
                 />
 
                 <Button

@@ -89,9 +89,8 @@ public class PersonController {
     }
 
     @PostMapping("/activate")
-    public Person activate(@RequestBody Map<String, String> request){
+    public Person activate(@RequestBody PersonVerifyCodeDTO dto){
 
-        String validationCode = request.get("validationCode");
-        return personService.activate(validationCode);
+        return personService.activate(dto);
     }
 }
