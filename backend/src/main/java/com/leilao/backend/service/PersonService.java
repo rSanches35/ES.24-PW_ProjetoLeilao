@@ -46,7 +46,7 @@ public class PersonService implements UserDetailsService {
         context.setVariable("code", code);
 
         try {
-            emailService.sendTemplateEmail(personCreated.getEmail(), "Cadastro", context, "emailWelcome");
+            emailService.sendTemplateEmail(personCreated.getEmail(), "Cadastro Realizdo!", context, "emailWelcome");
         } catch (MessagingException e) {
             e.printStackTrace();
         }
@@ -115,7 +115,7 @@ public class PersonService implements UserDetailsService {
         context.setVariable("code", code);
 
         try {
-            emailService.sendTemplateEmail(user.getEmail(), "Recuperar", context, "emailRecover");
+            emailService.sendTemplateEmail(user.getEmail(), "Recuperar Senha!", context, "emailRecover");
         } catch (MessagingException e) {
             e.printStackTrace();
         }

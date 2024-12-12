@@ -7,6 +7,8 @@ import DefaultLayout from './components/DefaultLayout';
 import SimpleLayout from './components/SimpleLayout';
 
 import ForgotPassword from './pages/forgot-password/ForgotPassword';
+import PageNotFound from './pages/page-not-found/PageNotFound';
+import LoginRequest from './pages/login-request/LoginRequest';
 import Register from './pages/register/Register';
 import Validate from './pages/validate/Validate';
 import Profile from './pages/profile/Profile';
@@ -27,8 +29,11 @@ function App() {
 
           <Route path='/login' element={<SimpleLayout><Login/></SimpleLayout>}/>
           <Route path='/register' element={<SimpleLayout><Register/></SimpleLayout>}/>
-          <Route path='/validate' element={<SimpleLayout><Validate /></SimpleLayout>} />
+          <Route path='/validate' element={<SimpleLayout><Validate/></SimpleLayout>} />
           <Route path='/forgot-password' element={<SimpleLayout><ForgotPassword/></SimpleLayout>}/>
+          <Route path='/login-request' element={<SimpleLayout><LoginRequest/></SimpleLayout>}/>
+
+          <Route path="*" element={<SimpleLayout><PageNotFound/></SimpleLayout>} />
         </Routes>
       </BrowserRouter>
     </>

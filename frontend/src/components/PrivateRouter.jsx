@@ -8,6 +8,6 @@ const PrivateRouter = () =>{
 
     return (
 
-        isAuthenticated?<Outlet/>:<Navigate to='/login'/>
+        isAuthenticated?<Outlet/>:<Navigate to='/login-request'/>
     );
 }; export default PrivateRouter;

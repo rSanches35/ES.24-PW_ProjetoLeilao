@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useRef } from "react";
 import { Helmet } from 'react-helmet';
 import { Link, useNavigate } from 'react-router-dom';
 
 import './Register.css'
 
 import { Card } from 'primereact/card';
+import { Toast } from 'primereact/toast';
 import { Button } from 'primereact/button';
 import { Divider } from "primereact/divider";
 import { Password } from 'primereact/password';
@@ -17,15 +18,16 @@ import PersonService from "../../services/PersonService";
 
 const Register = () => {
 
+    const toast = useRef(null);
     const navigate = useNavigate();
     const personService = new PersonService;
 
     const [user, setUser] = useState({
-        name: "", 
-        email: "",
+        name: null, 
+        email: null,
         phone: "",
-        birthDate: "",
-        password: "",
+        birthDate: null,
+        password: null,
     });
 
     const [password, setPassword] = useState("");
@@ -115,6 +117,18 @@ const Register = () => {
         else { setErrorMessage(""); }
     };
 
+    const showErrorBlank = () => {
+        toast.current.show({severity:'error', summary: 'Error', detail:'The field[s] cannot be empty!', life: 3000});
+    }
+
+    const showErrorNotUnique = () => {
+        toast.current.show({severity:'error', summary: 'Error', detail:'Email or Phone already registered!', life: 3000});
+    }
+
+    const showAccountRegister = () => {
+        toast.current.show({severity:'success', summary: 'Success', detail:'Account Created!', life: 3000});
+    }
+
     const register = async () => {
 
         try {
@@ -122,14 +136,21 @@ const Register = () => {
             const response = await personService.register(user);
             if (response) {
                 const email = user.email;
-                navigate("/validate", {email});
+
+                showAccountRegister();
+                setTimeout(() => { navigate("/validate", { state: { email } });}, 1800);
             }
-        } catch (error){ alert(error); }
+        } catch (error){
+            if(user.name == null || user.email == null || user.birthDate == null || password  == null || passwordConfirm == null) {showErrorBlank();}
+            else if(error.status == 500){showErrorNotUnique();}
+        }
     }
 
     return (
         <div className="body-register">
             <Helmet><title>Register</title></Helmet>
+
+            <Toast ref={toast} />
 
             <Card title="Register"
             className="pt-5 md:w-25rem flex flex-column align-items-center text-center">
