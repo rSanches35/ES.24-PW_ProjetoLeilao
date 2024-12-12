@@ -8,6 +8,7 @@ import SimpleLayout from './components/SimpleLayout';
 
 import ForgotPassword from './pages/forgot-password/ForgotPassword';
 import Register from './pages/register/Register';
+import Validate from './pages/validate/Validate';
 import Profile from './pages/profile/Profile';
 import Login from './pages/login/Login';
 import Home from './pages/home/Home';
@@ -26,6 +27,7 @@ function App() {
 
           <Route path='/login' element={<SimpleLayout><Login/></SimpleLayout>}/>
           <Route path='/register' element={<SimpleLayout><Register/></SimpleLayout>}/>
+          <Route path='/validate' element={<SimpleLayout><Validate /></SimpleLayout>} />
           <Route path='/forgot-password' element={<SimpleLayout><ForgotPassword/></SimpleLayout>}/>
         </Routes>
       </BrowserRouter>

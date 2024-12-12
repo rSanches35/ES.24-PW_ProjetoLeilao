@@ -11,6 +11,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import com.leilao.backend.model.dto.PersonAuthRequestDTO;
 import com.leilao.backend.model.dto.PersonAuthResponseDTO;
 import com.leilao.backend.model.dto.PersonChangePasswordDTO;
+import com.leilao.backend.model.dto.PersonVerifyCodeDTO;
 import com.leilao.backend.repository.PersonRepository;
 
 import org.springframework.web.bind.annotation.PutMapping;
@@ -20,7 +21,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.lang.reflect.Executable;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,16 +60,8 @@ public class PersonController {
         else { throw new IllegalArgumentException("User not Active");}
     }
 
-    /* 
-    @PostMapping("/password-code-request")
-    public String passwordCodeRequest(@RequestBody PersonAuthRequestDTO person) {
-        return personService.passwordCodeRequest(person);
-    }
-    */
-
     @PostMapping
     public Person create(@Valid @RequestBody Person person) {
-
         return personService.create(person);
     }
 
@@ -78,23 +70,27 @@ public class PersonController {
         return personService.create(person);
     }
 
-    @PostMapping("/recover")
-    public Person recover(@RequestBody Map<String, String> request){
-
-        String email = request.get("email");
-        return personService.recoverPassword(email);
+    @PostMapping("/recover-email")
+    public String recoverSendEmail(@RequestBody Map<String, String> json){
+        String email = json.get("email");
+        return personService.recoverSendEmail(email);
     }
 
-    @PostMapping("/change")
-    public Person change(@RequestBody PersonChangePasswordDTO dto){
+    @PostMapping("/recover-code")
+    public Person recoverVerifyCode(@RequestBody PersonVerifyCodeDTO dto){
 
-        return personService.changePassword(dto);
+        return personService.recoverVerifyCode(dto);
+    }
+
+    @PostMapping("/recover-change")
+    public Person recoverChangePassword(@RequestBody PersonChangePasswordDTO dto){
+
+        return personService.recoverChangePassword(dto);
     }
 
     @PostMapping("/activate")
-    public Person activate(@RequestBody Map<String, String> request){
+    public Person activate(@RequestBody PersonVerifyCodeDTO dto){
 
-        String validationCode = request.get("validationCode");
-        return personService.activate(validationCode);
+        return personService.activate(dto);
     }
 }

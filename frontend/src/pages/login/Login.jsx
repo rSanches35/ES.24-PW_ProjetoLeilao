@@ -10,6 +10,8 @@ import { Button } from 'primereact/button';
 import { Password } from 'primereact/password';
 import { InputText } from 'primereact/inputtext';
 
+import PersonService from "../../services/PersonService";
+
 
 const Login = () => {
 
@@ -18,6 +20,8 @@ const Login = () => {
         email:"",
         password:""
     });
+
+    const personService = new PersonService;
 
     const handleChange = (input) =>{
 
@@ -29,18 +33,18 @@ const Login = () => {
         if (event.key === 'Enter') { login();}
     }
 
-    const login = () =>{
+    const login = async () => {
 
-        if(user.email == "user" && user.password == "123") {
-
-            let token = "token do backend"
-
-            localStorage.setItem("token", token);
-            localStorage.setItem("email", user.email);
-
-            navigate("/");
+        try {
+            console.log(user);
+            const response = await personService.login(user);
+            if (response) {
+                localStorage.setItem("token", JSON.stringify(response));
+                navigate("/");
+            }
+        } catch (error) {
+            alert(error)
         }
-        else {alert("Access Denied!");}
     }
 
     return (
@@ -81,13 +85,20 @@ const Login = () => {
                     <Button
                     label="Forgot your Password?"
                     link
-                    className="-mb-3"/>
+                    className="mt-2 -mb-3"/>
+                </Link>
+
+                <Link to="/validate" className="w-full">
+                    <Button
+                    label="Validate your Account"
+                    link/>
                 </Link>
 
                 <Link to="/register" className="w-full">
                     <Button
                     label="Create Account"
-                    link/>
+                    link
+                    className="-mt-3" />
                 </Link>
 
                 </div>
