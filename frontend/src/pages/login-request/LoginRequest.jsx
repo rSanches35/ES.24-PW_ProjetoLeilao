@@ -15,38 +15,6 @@ import PersonService from "../../services/PersonService";
 
 const LoginRequest = () => {
 
-    const navigate = useNavigate();
-    const [user, setUser] = useState({
-        email:"",
-        password:""
-    });
-
-    const personService = new PersonService;
-
-    const handleChange = (input) =>{
-
-        setUser({...user, [input.target.name]:input.target.value});
-    }
-
-    const handleKeyDown = (event) => {
-        
-        if (event.key === 'Enter') { login();}
-    }
-
-    const login = async () => {
-
-        try {
-            console.log(user);
-            const response = await personService.login(user);
-            if (response) {
-                localStorage.setItem("token", JSON.stringify(response));
-                navigate("/");
-            }
-        } catch (error) {
-            alert(error)
-        }
-    }
-
     return (
         <div className="body-login">
             <Helmet><title>Log In</title></Helmet>
