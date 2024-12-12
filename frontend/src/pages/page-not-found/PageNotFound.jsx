@@ -22,7 +22,7 @@ const PageNotFound = () => {
                 <img className="w-2 mt-1 mb-3" src="/images/page-not-found.png" alt=""></img>
 
                 <h4 className="mt-1 px-6">
-                    The page you tried to access asks for Login.</h4>
+                    The page you requested could not be found.</h4>
 
                 <div className="flex flex-column align-items-center mt-3">
 
