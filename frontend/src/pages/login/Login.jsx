@@ -39,7 +39,7 @@ const Login = () => {
             console.log(user);
             const response = await personService.login(user);
             if (response) {
-                localStorage.setItem("user", JSON.stringify(response));
+                localStorage.setItem("token", JSON.stringify(response));
                 navigate("/");
             }
         } catch (error) {

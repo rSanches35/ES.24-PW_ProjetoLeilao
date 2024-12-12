@@ -13,9 +13,10 @@ import { InputText } from 'primereact/inputtext';
 import PersonService from "../../services/PersonService";
 
 
-const Validate = () => {
+const Validate = ({ emailDigitado }) => {
 
-    const [email, setEmail] = useState("");
+    const [email] = useState(emailDigitado);
+    const [setEmail] = useState("");
     const [otp, setOtp] = useState("");
 
     const navigate = useNavigate();
@@ -36,7 +37,6 @@ const Validate = () => {
         } catch (error) {
 
             console.log(email);
-            console.log(otp);
         }
     }
 

@@ -118,11 +118,11 @@ const Register = () => {
     const register = async () => {
 
         try {
-            console.log(user);
+
             const response = await personService.register(user);
             if (response) {
-                localStorage.setItem("user", JSON.stringify(response));
-                navigate("/login");
+                const email = user.email;
+                navigate("/validate", {email});
             }
         } catch (error){ alert(error); }
     }

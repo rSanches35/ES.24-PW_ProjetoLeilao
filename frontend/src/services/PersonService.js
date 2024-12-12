@@ -14,7 +14,7 @@ class PersonService extends BaseService {
     return response.data;
   }
 
-  //A
+  //ACTIVATE
   async activate(person) {
 
     const response = await this.api.post(
