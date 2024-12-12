@@ -7,6 +7,7 @@ import DefaultLayout from './components/DefaultLayout';
 import SimpleLayout from './components/SimpleLayout';
 
 import ForgotPassword from './pages/forgot-password/ForgotPassword';
+import LoginRequest from './pages/login-request/LoginRequest';
 import Register from './pages/register/Register';
 import Validate from './pages/validate/Validate';
 import Profile from './pages/profile/Profile';
@@ -29,6 +30,7 @@ function App() {
           <Route path='/register' element={<SimpleLayout><Register/></SimpleLayout>}/>
           <Route path='/validate' element={<SimpleLayout><Validate /></SimpleLayout>} />
           <Route path='/forgot-password' element={<SimpleLayout><ForgotPassword/></SimpleLayout>}/>
+          <Route path='/login-request' element={<SimpleLayout><LoginRequest/></SimpleLayout>}/>
         </Routes>
       </BrowserRouter>
     </>
