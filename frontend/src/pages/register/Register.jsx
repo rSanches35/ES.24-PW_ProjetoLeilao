@@ -122,7 +122,7 @@ const Register = () => {
             const response = await personService.register(user);
             if (response) {
                 const email = user.email;
-                navigate("/validate", {email});
+                navigate("/validate", { state: { email } });
             }
         } catch (error){ alert(error); }
     }

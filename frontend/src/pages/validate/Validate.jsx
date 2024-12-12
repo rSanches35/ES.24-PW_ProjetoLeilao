@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Helmet } from 'react-helmet';
 import { Link } from 'react-router-dom';
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 import './Validate.css'
 
@@ -13,10 +13,12 @@ import { InputText } from 'primereact/inputtext';
 import PersonService from "../../services/PersonService";
 
 
-const Validate = ({ emailDigitado }) => {
+const Validate = () => {
 
-    const [email] = useState(emailDigitado);
-    const [setEmail] = useState("");
+    const location = useLocation();
+    const emailDigitado = location.state?.email || "";
+
+    const [email, setEmail] = useState(emailDigitado);
     const [otp, setOtp] = useState("");
 
     const navigate = useNavigate();
@@ -52,9 +54,10 @@ const Validate = ({ emailDigitado }) => {
                 className="pt-5 md:w-25rem flex flex-column align-items-center text-center">
 
                 <InputText
+                placeholder={emailDigitado ? emailDigitado : "E-Mail"}
                 value={email}
                 id="email"
-                className="mt-3 mb-3"
+                className="mt-3 mb-3 w-full"
                 onChange={(e) => setEmail(e.target.value)}
                 onKeyDown={handleKeyDown}
                 />
@@ -68,7 +71,7 @@ const Validate = ({ emailDigitado }) => {
 
                 <Button
                     label="Validate"
-                    className="mt-5 mb-3 px-6"
+                    className="mt-6 mb-3 px-6"
                     onClick={validate}
                 />
 
