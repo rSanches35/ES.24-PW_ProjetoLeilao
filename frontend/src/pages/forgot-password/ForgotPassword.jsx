@@ -23,9 +23,9 @@ const ForgotPassword = () => {
     const [currentSection, setCurrentSection] = useState(1);
 
     const navigate = useNavigate();
-    const [otp, setOtp] = useState("");
+    const [otp, setOtp] = useState(null);
 
-    const [email, setEmail] = useState("");
+    const [email, setEmail] = useState(null);
     const [password, setPassword] = useState("");
     const [passwordConfirm, setPasswordConfirm] = useState("");
     const [errorMessage, setErrorMessage] = useState("");
@@ -115,12 +115,20 @@ const ForgotPassword = () => {
         }
     };
 
+    const showErrorBlank = () => {
+        toast.current.show({severity:'error', summary: 'Error', detail:'The field[s] cannot be empty!', life: 3000});
+    }
+
     const showErrorEmailNotFound = () => {
         toast.current.show({severity:'error', summary: 'Error', detail:'Email not Found!', life: 3000});
     }
 
     const showErrorInvalidCode = () => {
         toast.current.show({severity:'error', summary: 'Error', detail:'Incorrect or Expired Code!', life: 3000});
+    }
+
+    const showPasswordChanged = () => {
+        toast.current.show({severity:'success', summary: 'Success', detail:'Password Changed!', life: 3000});
     }
 
     const handleNext = async () => {
@@ -130,7 +138,10 @@ const ForgotPassword = () => {
                 const response = await personService.recoverSendEmail(email);
                 if(response){ setCurrentSection(prevSection => prevSection + 1); setErrorMessage(null);}
             }
-            catch(error){ if(error.status == 500){showErrorEmailNotFound();}}
+            catch(error){ 
+                if(email == null) {showErrorBlank();}
+                else if(error.status == 500){showErrorEmailNotFound();}
+            }
         };
 
         if(currentSection == 2){
@@ -139,7 +150,10 @@ const ForgotPassword = () => {
                 const response = await personService.recoverVerifyCode({email, code:  otp});
                 if(response){ setCurrentSection(prevSection => prevSection + 1); setErrorMessage(null);}
             }
-            catch(error){ if(error.status == 500){showErrorInvalidCode();}}
+            catch(error){
+                if(otp == null) {showErrorBlank();}
+                else if(error.status == 500){showErrorInvalidCode();}
+            }
         }
 
         if(currentSection == 3){
@@ -147,7 +161,11 @@ const ForgotPassword = () => {
             if(password == passwordConfirm) {
                 try{
                     const response = await personService.recoverChangePassword({email, password});
-                    if(response){ navigate("/login")}
+                    if(response){
+
+                        showPasswordChanged();
+                        setTimeout(() => { navigate("/login");}, 1800);
+                    }
                 }
                 catch(error){ setErrorMessage("Erro ao alterar a Senha"); alert(errorMessage);}
             }

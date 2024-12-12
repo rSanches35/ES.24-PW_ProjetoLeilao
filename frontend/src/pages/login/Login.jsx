@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { Helmet } from 'react-helmet';
 import { Link } from 'react-router-dom';
 import { useNavigate } from "react-router-dom";
@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import './Login.css'
 
 import { Card } from 'primereact/card';
+import { Toast } from 'primereact/toast';
 import { Button } from 'primereact/button';
 import { Password } from 'primereact/password';
 import { InputText } from 'primereact/inputtext';
@@ -15,10 +16,12 @@ import PersonService from "../../services/PersonService";
 
 const Login = () => {
 
+    const toast = useRef(null);
+
     const navigate = useNavigate();
     const [user, setUser] = useState({
-        email:"",
-        password:""
+        email: null,
+        password: null
     });
 
     const personService = new PersonService;
@@ -33,23 +36,33 @@ const Login = () => {
         if (event.key === 'Enter') { login();}
     }
 
+    const showErrorBlank = () => {
+        toast.current.show({severity:'error', summary: 'Error', detail:'The field[s] cannot be empty!', life: 3000});
+    }
+
+    const showErrorInvalidLogin = () => {
+        toast.current.show({severity:'error', summary: 'Error', detail:'Incorrect Email or Password!', life: 3000});
+    }
+
     const login = async () => {
 
         try {
-            console.log(user);
             const response = await personService.login(user);
             if (response) {
                 localStorage.setItem("token", JSON.stringify(response));
                 navigate("/");
             }
         } catch (error) {
-            alert(error)
+            if(user.email == null || user.password == null) {showErrorBlank();}
+            else if(error.status == 500){showErrorInvalidLogin();}
         }
     }
 
     return (
         <div className="body-login">
             <Helmet><title>Log In</title></Helmet>
+
+            <Toast ref={toast} />
 
             <Card title="Log In"
             className="pt-5 md:w-25rem flex flex-column align-items-center text-center">
