@@ -15,7 +15,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 public class AuctionCategory {
   
     @GeneratedValue(strategy = GenerationType.IDENTITY) 
-    @Id private Long id_person_profile;
+    @Id private Long id_auction_category;
 
     @ManyToOne @JoinColumn(name = "id_auction")
     private Auction auction;

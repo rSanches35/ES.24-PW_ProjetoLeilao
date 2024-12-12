@@ -13,7 +13,7 @@ import jakarta.validation.constraints.NotBlank;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @JsonIgnoreProperties({"authorities", "accountNonExpired", "accountNonLocked", "credentialsNonExpired", "enabled"})
-@Data @Entity @Table(name = "auction")
+@Data @Entity @Table(name = "category")
 public class Category {
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)

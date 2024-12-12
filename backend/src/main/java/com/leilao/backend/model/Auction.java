@@ -15,6 +15,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 import lombok.AccessLevel;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 
 import java.sql.Date;
 import java.time.LocalDateTime;
@@ -37,7 +39,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 public class Auction {
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Id private Long id_auction;
+    @Id private Long idAuction;
 
     @NotBlank(message =  "Title is Required")
     private String title;
@@ -60,12 +62,13 @@ public class Auction {
     @Column(name = "minimum_bid") @NotNull(message = "Minimum Bid is Required")
     private Double minimumBid;
 
-    @Column(name = "id_category")
+    @ManyToOne
+    @JoinColumn(name = "id_category")
     private Category category;
 
     @OneToMany(mappedBy = "auction", orphanRemoval = true, cascade = CascadeType.ALL)
     @Setter(value = AccessLevel.NONE)
-    private List<PersonProfile> personProfile;
+    private List<AuctionCategory> auctionCategory;
 
     /*
 @   Override
