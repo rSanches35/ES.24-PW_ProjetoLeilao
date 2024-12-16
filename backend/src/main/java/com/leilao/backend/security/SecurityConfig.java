@@ -43,6 +43,7 @@ public class SecurityConfig {
             .cors(cors -> cors.configurationSource(corsConfigurationSource()))
             .authorizeHttpRequests(authorize -> authorize
                 .requestMatchers("/api/person/**").permitAll()
+                .requestMatchers("/api/auction/**").permitAll()
                 .anyRequest().authenticated()
             )
             .sessionManagement(session -> session
