@@ -1,4 +1,85 @@
+/* Container principal da lista de leilões */
+.auction-list-container {
+    padding: 16px;
+    background-color: #f9f9f9; /* Fundo suave */
+}
 
-.body-home {
+/* Estilização do card da lista de leilões */
+.auction-list-card {
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    width: 88vw;
+}
 
+/* Espaçamento entre itens */
+.auction-item-container {
+    margin-bottom: 24px; /* Espaçamento entre os itens */
+}
+
+/* Card de cada item */
+.auction-item-card {
+    width: 100%; /* Ocupa toda a largura disponível */
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1); /* Leve sombra para destaque */
+    padding: 16px;
+    background-color: #ffffff;
+    border-radius: 8px;
+}
+
+/* Cabeçalho do item */
+.auction-item-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+/* Avatar do item */
+.auction-item-avatar {
+    margin-right: 12px;
+}
+
+/* Título e data */
+.auction-item-title {
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: #333;
+}
+
+.auction-item-date {
+    font-size: 0.875rem;
+    color: #777;
+}
+
+/* Meta e detalhes */
+.auction-item-meta {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+}
+
+.auction-item-status {
+    font-size: 0.9rem;
+    font-weight: bold;
+    color: #5cb85c; /* Verde para status ativo */
+}
+
+.auction-item-minimum-bid {
+    font-size: 0.9rem;
+    color: #d9534f; /* Vermelho para valores */
+}
+
+/* Descrição */
+.auction-item-description {
+    font-size: 0.95rem;
+    color: #555;
+}
+
+/* Botão de ação */
+.auction-item-button {
+    margin-top: 12px;
+    width: 100%;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 12px;
 }

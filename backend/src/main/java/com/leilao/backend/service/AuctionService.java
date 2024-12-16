@@ -21,7 +21,9 @@ public class AuctionService {
     public Auction create(Auction auction, Person person) {
 
         auction.setPerson(person);
+        //auction.setCategory(category);
         auction.setStartDateTime(LocalDateTime.now());
+
         return auctionRepository.save(auction);
     }
 

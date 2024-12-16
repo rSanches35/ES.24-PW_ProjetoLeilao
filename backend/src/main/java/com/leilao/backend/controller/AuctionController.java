@@ -47,7 +47,7 @@ public class AuctionController {
         return auctionService.update(auction);
     }
 
-    @GetMapping("/listAll")
+    @GetMapping("/list-all")
     public List<Auction> listAll() {
         return auctionService.listAll();
     }
