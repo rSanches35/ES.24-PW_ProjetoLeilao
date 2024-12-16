@@ -49,7 +49,7 @@ const Login = () => {
         try {
             const response = await personService.login(user);
             if (response) {
-                localStorage.setItem("token", JSON.stringify(response));
+                localStorage.setItem("token", response.token);
                 navigate("/");
             }
         } catch (error) {
