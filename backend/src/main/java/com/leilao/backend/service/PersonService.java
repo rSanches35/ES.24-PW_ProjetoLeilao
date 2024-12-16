@@ -54,50 +54,6 @@ public class PersonService implements UserDetailsService {
         return personCreated;
     }
 
-    /*
-     * public Person recoverPassword(String email) {
-     * 
-     * Person person = personRepository.findByEmail(email).orElseThrow(() -> new
-     * UsernameNotFoundException("User not Found"));
-     * 
-     * String code = codeGenerate();
-     * 
-     * person.setValidationCode(code);
-     * person.setValidationCodeDate(LocalDateTime.now().plusMinutes(5));
-     * personRepository.save(person);
-     * 
-     * Context context = new Context();
-     * context.setVariable("name", person.getName());
-     * context.setVariable("code", code);
-     * 
-     * try {
-     * emailService.sendTemplateEmail(person.getEmail(), "Recuperar", context,
-     * "emailRecover");
-     * } catch (MessagingException e) {
-     * e.printStackTrace();
-     * }
-     * 
-     * return person;
-     * }
-     * 
-     * public Person changePassword(PersonChangePasswordDTO dto){
-     * 
-     * Person person = personRepository.findByEmail(dto.getEmail()).orElseThrow(()
-     * -> new UsernameNotFoundException("User not Found"));
-     * 
-     * if(dto.getValidationCode().equals(person.getValidationCode()) &&
-     * person.getValidationCodeDate().isAfter(LocalDateTime.now())){
-     * 
-     * person.setPassword(dto.getPassword());
-     * person.setValidationCodeDate(null);
-     * 
-     * personRepository.save(person);
-     * return person;
-     * }
-     * else { throw new IllegalArgumentException("Invalid Validation Code");}
-     * }
-     */
-
     public String recoverSendEmail(String email) {
 
         System.out.println(email);
